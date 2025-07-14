@@ -98,13 +98,13 @@
             Tags         = @('PowerShell', 'DigitalOcean', 'API', 'Cloud', 'Management', 'Automation', 'DevOps', 'Infrastructure')
 
             # A URL to the license for this module.
-            LicenseUri   = 'https://github.com/YOUR_USERNAME/PSDigitalOcean/blob/main/LICENSE'
+            LicenseUri   = 'https://github.com/itamartz/PSDigitalOceanUsingSampler/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri   = 'https://github.com/YOUR_USERNAME/PSDigitalOcean'
+            ProjectUri   = 'https://github.com/itamartz/PSDigitalOceanUsingSampler'
 
             # A URL to an icon representing this module.
-            # IconUri = 'https://github.com/YOUR_USERNAME/PSDigitalOcean/raw/main/icon.png'
+            # IconUri = 'https://github.com/itamartz/PSDigitalOceanUsingSampler/raw/main/icon.png'
 
             # ReleaseNotes of this module
             ReleaseNotes = @'
