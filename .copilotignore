@@ -1,0 +1,51 @@
+# GitHub Copilot ignore file
+# Files and patterns listed here will be excluded from Copilot suggestions
+
+# Build scripts
+build.ps1
+Resolve-Dependency.ps1
+
+# Output and build artifacts
+output/
+*.nupkg
+*.zip
+
+# Test results
+TestResults/
+coverage.xml
+*.trx
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# Log files
+*.log
+
+# IDE and editor files
+.vscode/settings.json
+.vscode/launch.json
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Sensitive files (if any)
+*.key
+*.secret
+*.token
+
+# Node modules (if any)
+node_modules/
+
+# PowerShell specific
+*.ps1xml
