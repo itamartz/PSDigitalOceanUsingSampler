@@ -2,7 +2,6 @@
 
 A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage.
 
-[![Build Status](https://dev.azure.com/your-org/PSDigitalOcean/_apis/build/status/PSDigitalOcean-CI?branchName=main)](https://dev.azure.com/your-org/PSDigitalOcean/_build/latest?definitionId=1&branchName=main)
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
 [![Code Coverage](https://img.shields.io/badge/coverage-98.06%25-brightgreen.svg)](https://codecov.io/gh/your-username/PSDigitalOcean)
 
