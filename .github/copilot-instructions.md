@@ -79,4 +79,4 @@ This ensures proper dependency resolution during module compilation.
 ## Github Instructions
 
 - **Issue Tracking**: Use GitHub Issues for bug reports and feature requests
-- **Commit Messages**: Follow conventional commit standards for clarity, insure - README file update with code coverage and test counts
+- **Commit Messages**: Follow conventional commit standards for clarity, ensure README file update with code coverage and test counts
