@@ -21,6 +21,10 @@
 		"powershell.scriptAnalysis.enable": true,
 		"files.associations": {
 			"*.ps1xml": "xml"
-		}
+		},
+		"github.copilot.advanced": {
+			"enabled": true,
+			"autoImport": true
+		},
 	}
 }
