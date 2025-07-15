@@ -3,18 +3,22 @@
 A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-98.06%25-brightgreen.svg)](https://codecov.io/gh/your-username/PSDigitalOcean)
+[![Code Coverage](https://img.shields.io/badge/coverage-96.15%25-brightgreen.svg)](https://codecov.io/gh/your-username/PSDigitalOcean)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern development practices  
-✅ **98.06% Test Coverage** with 99 comprehensive passing tests using Pester v5  
-✅ **Class-based Architecture** with strongly-typed PowerShell classes for Account, Team, and Root objects  
+✅ **96.15% Test Coverage** with 170 comprehensive passing tests using Pester v5  
+✅ **Class-based Architecture** with strongly-typed PowerShell classes for Account,  
+   Team, Image, and Root objects  
 ✅ **Comprehensive Error Handling** and defensive programming patterns throughout  
-✅ **CI/CD Pipeline** with Azure Pipelines configuration for automated testing and deployment  
-✅ **Professional Documentation** with detailed help files, examples, and inline documentation  
+✅ **CI/CD Pipeline** with Azure Pipelines configuration for automated testing and  
+   deployment  
+✅ **Professional Documentation** with detailed help files, examples, and inline  
+   documentation  
 ✅ **Modern Build System** using Sampler framework with ModuleBuilder integration  
-✅ **Enterprise Ready** with full parameter validation, pagination support, and robust API integration
+✅ **Enterprise Ready** with full parameter validation, pagination support, and  
+   robust API integration
 
 ## 📦 Installation
 
@@ -52,6 +56,19 @@ Get-DigitalOceanAccount -Page 1 -Limit 20
 Get-DigitalOceanAccount -All
 ```
 
+### Get DigitalOcean Images
+```powershell
+# Get images with pagination
+Get-DigitalOceanImage -Page 1 -Limit 20
+
+# Get all images at once
+Get-DigitalOceanImage -All
+
+# Filter by image type
+Get-DigitalOceanImage -Type "application"
+Get-DigitalOceanImage -Type "distribution"
+```
+
 ### Working with Class Objects
 The module returns strongly-typed PowerShell class objects:
 
@@ -65,8 +82,12 @@ Write-Host "Team Name: $($account.team.name)"
 ## 🏗️ Architecture
 
 ### PowerShell Classes
+
 - **Team**: Represents DigitalOcean team information with UUID and name
-- **Account**: Complete account object with limits, verification status, and team association
+- **Account**: Complete account object with limits, verification status, and  
+  team association
+- **DigitalOceanImage**: Represents DigitalOcean images with comprehensive  
+  metadata and properties
 - **Root**: Container class for account responses
 
 ### API Integration
@@ -77,8 +98,9 @@ Write-Host "Team Name: $($account.team.name)"
 ## 🧪 Testing & Quality
 
 ### Test Coverage
-- **99 Tests** across all functionality
-- **98.06% Code Coverage** exceeding industry standards
+
+- **170 Tests** across all functionality
+- **96.15% Code Coverage** exceeding industry standards
 - **Unit Tests** for all public and private functions
 - **Integration Tests** for complete workflows
 - **Class Coverage Tests** ensuring all PowerShell classes work correctly
@@ -126,7 +148,10 @@ PSDigitalOcean/
 ## 📋 Available Functions
 
 ### Public Functions
+
 - `Get-DigitalOceanAccount` - Retrieve account information with pagination support
+- `Get-DigitalOceanImage` - Retrieve DigitalOcean images with filtering and  
+  pagination support
 
 ### Private Functions
 - `Get-DigitalOceanAPIAuthorizationBearerToken` - Token management

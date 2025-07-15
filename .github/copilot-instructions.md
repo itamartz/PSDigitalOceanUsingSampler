@@ -75,3 +75,8 @@ This ensures proper dependency resolution during module compilation.
 - `build.yaml`: ModuleBuilder configuration with encoding and copy paths
 - `RequiredModules.psd1`: Build dependencies (Pester, PSScriptAnalyzer, Sampler, etc.)
 - `tests/QA/module.tests.ps1`: Quality gates for help documentation and PSScriptAnalyzer compliance
+
+## Github Instructions
+
+- **Issue Tracking**: Use GitHub Issues for bug reports and feature requests
+- **Commit Messages**: Follow conventional commit standards for clarity, insure - README file update with code coverage and test counts
