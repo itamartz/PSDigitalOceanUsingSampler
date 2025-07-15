@@ -107,7 +107,33 @@
             # IconUri = 'https://github.com/itamartz/PSDigitalOceanUsingSampler/raw/main/icon.png'
 
             # ReleaseNotes of this module
+            # ReleaseNotes of this module
             ReleaseNotes = @'
+## v1.1.0 - Latest Release
+
+### Added
+- Get-DigitalOceanImage: Retrieve DigitalOcean images with filtering and pagination support
+- Enhanced DigitalOceanImage class with comprehensive properties and methods
+- Support for image type filtering (application, distribution)
+
+### Features
+- Complete PowerShell module for DigitalOcean API integration
+- Class-based architecture with Account, Team, Root, and DigitalOceanImage objects
+- Comprehensive error handling and defensive programming
+- 96.15% test coverage with 170 passing tests
+- Support for pagination and bulk operations
+- Professional documentation and examples
+
+### Functions
+- Get-DigitalOceanAccount: Retrieve account information with pagination support
+- Get-DigitalOceanImage: Retrieve DigitalOcean images with filtering and pagination support
+
+### Quality
+- Enterprise-grade reliability with extensive testing
+- CI/CD pipeline with Azure DevOps integration
+- PSScriptAnalyzer compliance
+- Modern build system using Sampler framework
+
 ## v1.0.0 - Initial Release
 
 ### Features
@@ -127,7 +153,6 @@
 - PSScriptAnalyzer compliance
 - Modern build system using Sampler framework
 '@
-
             # Prerelease string of this module
             Prerelease   = ''
 

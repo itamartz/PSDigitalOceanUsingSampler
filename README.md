@@ -199,7 +199,7 @@ This project is licensed under the MIT License – see the
 
 - [DigitalOcean API Documentation](https://docs.digitalocean.com/reference/api/)
 - [PowerShell Gallery](https://www.powershellgallery.com/packages/PSDigitalOcean)
-- [Issue Tracker](https://github.com/your-username/PSDigitalOcean/issues)
+- [Issue Tracker](https://github.com/Itamartz/PSDigitalOcean/issues)
 
 ## 📈 Roadmap
 
