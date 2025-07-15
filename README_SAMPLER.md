@@ -32,4 +32,21 @@ Describe -Name $DescribeName {
 
 }
 ```
-## Create 85 % Code Coverage tests
+
+## Create at least 85 % Code Coverage tests
+
+## Version Update Methods - GitVersion-Based
+
+```bash
+### For patch version bump (1.0.0 → 1.0.1)
+git commit -m "fix: resolve API timeout issue"
+
+# For minor version bump (1.0.0 → 1.1.0)  
+git commit -m "feature: add support for Droplet management"
+
+# For major version bump (1.0.0 → 2.0.0)
+git commit -m "breaking change: remove deprecated functions"
+
+# To skip version bump
+git commit -m "docs: update README +semver: skip"
+```
