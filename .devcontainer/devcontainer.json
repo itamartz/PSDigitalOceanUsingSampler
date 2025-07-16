@@ -12,7 +12,7 @@
             "nonFreePackages": "true"
         }
     },
-    "postCreateCommand": "sudo chsh vscode -s \"$(which pwsh)\"",
+    "postCreateCommand": "wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && sudo dpkg -i packages-microsoft-prod.deb && sudo apt-get update && sudo apt-get install -y powershell && sudo chsh vscode -s \"$(which pwsh)\"",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
