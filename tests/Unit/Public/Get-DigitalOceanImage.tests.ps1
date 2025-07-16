@@ -14,8 +14,17 @@ BeforeAll {
         Import-Module -Name $script:dscModuleName
     }
 
-    $DIGITALOCEAN_TOKEN = Get-Content -Path 'C:\Temp\DIGITALOCEAN_TOKEN.txt' -ErrorAction SilentlyContinue -Raw
-    [Environment]::SetEnvironmentVariable("DIGITALOCEAN_TOKEN", $DIGITALOCEAN_TOKEN, [System.EnvironmentVariableTarget]::User)
+    if ($PSVersionTable.Platform -ne 'Win32NT')
+    {
+        # For Unix/Linux, read the token from a file in the home directory
+        $env:DIGITALOCEAN_TOKEN
+    }
+    # For Windows, read the token from a file in the Temp directory
+    else
+    {
+        $DIGITALOCEAN_TOKEN = Get-Content -Path 'C:\Temp\DIGITALOCEAN_TOKEN.txt' -ErrorAction SilentlyContinue -Raw
+        [Environment]::SetEnvironmentVariable("DIGITALOCEAN_TOKEN", $DIGITALOCEAN_TOKEN, [System.EnvironmentVariableTarget]::User)
+    }
 }
 
 AfterAll {
