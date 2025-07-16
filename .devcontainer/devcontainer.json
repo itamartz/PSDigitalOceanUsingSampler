@@ -12,6 +12,9 @@
             "nonFreePackages": "true"
         }
     },
+    "containerEnv": {
+        "DIGITALOCEAN_TOKEN": "8eb13314-5773-4edb-85cd-b48377816e1a"
+    },
     "postCreateCommand": "wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && sudo dpkg -i packages-microsoft-prod.deb && sudo apt-get update && sudo apt-get install -y powershell && sudo chsh vscode -s \"$(which pwsh)\"",
     // Configure tool-specific properties.
     "customizations": {
