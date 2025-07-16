@@ -1,6 +1,15 @@
 {
     "image": "mcr.microsoft.com/devcontainers/universal:2",
     "features": {
-        "ghcr.io/devcontainers/features/powershell:1": {}
-    }
+        "powershell": "latest"
+    },
+    "postCreateCommand": "pwsh -c \"& { . $PSScriptRoot/../.github/copilot-instructions.md }\"",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.powershell"
+            ]
+        }
+    },
+    "remoteUser": "vscode"
 }
