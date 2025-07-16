@@ -29,7 +29,8 @@
                 "ironmansoftware.powershellprotools",
                 "humao.rest-client",
                 "redhat.vscode-yaml",
-                "DavidAnson.vscode-markdownlint"
+                "DavidAnson.vscode-markdownlint",
+                "streetsidesoftware.code-spell-checker"
             ]
         }
     }
