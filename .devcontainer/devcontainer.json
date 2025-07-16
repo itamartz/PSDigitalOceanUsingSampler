@@ -1,7 +1,8 @@
 {
     "image": "mcr.microsoft.com/devcontainers/universal:2",
     "features": {
-        "powershell": "latest"
+        "powershell": "latest",
+        "ghcr.io/natescherer/devcontainers-custom-features/powershell-resources:1": {}
     },
     "postCreateCommand": "pwsh -c \"& { . $PSScriptRoot/../.github/copilot-instructions.md }\"",
     "customizations": {
