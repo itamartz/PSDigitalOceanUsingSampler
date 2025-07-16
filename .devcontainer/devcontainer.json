@@ -28,7 +28,8 @@
                 "ms-vscode.powershell",
                 "ironmansoftware.powershellprotools",
                 "humao.rest-client",
-                "redhat.vscode-yaml"
+                "redhat.vscode-yaml",
+                "DavidAnson.vscode-markdownlint"
             ]
         }
     }
