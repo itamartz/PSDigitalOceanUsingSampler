@@ -18,20 +18,25 @@ param(
 
     [Parameter()]
     [System.String]
-    $ProjectName = (property ProjectName $(
+    $ProjectName = $(
+        # Get the project name from build configuration first, or fallback to manifest detection
+        if ($BuildInfo -and $BuildInfo.ProjectName) {
+            $BuildInfo.ProjectName
+        } else {
             # Get the project name from the build root directory
             (Get-ChildItem -Path $BuildRoot -Filter '*.psd1' | Where-Object {
                 ($_.Directory.Name -match 'Source|Src' -or $_.Directory.Name -eq $_.BaseName) -and
                 $(try
                     {
-                        Test-ModuleManifest -Path $_.FullName -ErrorAction Stop; $true 
+                        Test-ModuleManifest -Path $_.FullName -ErrorAction Stop; $true
                     }
                     catch
                     {
-                        $false 
+                        $false
                     })
             } | Select-Object -First 1).BaseName
-        ))
+        }
+    )
 )
 
 # Synopsis: Updates the GitHub Wiki with latest documentation

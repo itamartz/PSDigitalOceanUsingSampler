@@ -2,6 +2,10 @@
 ####################################################
 #          ModuleBuilder Configuration             #
 ####################################################
+
+# Project name for the module
+ProjectName: 'PSDigitalOcean'
+
 # Path to the Module Manifest to build (where path will be resolved from)
 # SourcePath: ./Sampler/Sampler.psd1
 # Output Directory where ModuleBuilder will build the Module, relative to module manifest
@@ -52,6 +56,8 @@ BuildWorkflow:
     - Build_Module_ModuleBuilder
     - Build_NestedModules_ModuleBuilder
     - Create_changelog_release_output
+    - Generate_PlatyPS_Help
+    - Generate_Conceptual_Help_PlatyPS
 
 
   pack:
@@ -80,6 +86,35 @@ BuildWorkflow:
     - Publish_GitHub_Wiki_Content
 
     - publish_module_to_gallery
+
+####################################################
+#       PESTER  Configuration                      #
+####################################################
+
+####################################################
+#       PlatyPS Configuration                      #
+####################################################
+PlatyPS:
+  OutputPath: './output/docs/'
+  HelpPath: './docs/'
+  ExternalHelpPath: './output/{0}/en-US/'
+  ConceptualHelpPath: './docs/'
+  ProjectUri: 'https://github.com/Itamartz/PSDigitalOceanUsingSampler'
+
+# DscResource.DocGenerator:
+#   Generate_Conceptual_Help:
+#     MarkdownCodeRegularExpression:
+#       - '\`(.+?)\`' # Match inline code-spans
+#       - '\\(\\)' # Match escaped parenthesis
+#       - '\[[^\[]+\]\((.+?)\)' # Match markdown URL
+#       - '_(.+?)_' # Match Italic (underscore)
+#       - '\*\*(.+?)\*\*' # Match bold
+#       - '\*(.+?)\*' # Match Italic (asterisk)
+#   Generate_Wiki_Content:
+#     Debug: false
+#   Generate_Helpfiles:
+#     HelpFilePath: './output/{0}/en-US/'
+#     HelpProjectUri: 'https://github.com/Itamartz/PSDigitalOceanUsingSampler'
 
 ####################################################
 #       PESTER  Configuration                      #
