@@ -32,7 +32,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-try {
+try
+{
     Write-Host "🔄 Updating GitHub Wiki..." -ForegroundColor Green
 
     # Create temp directory for wiki repository
@@ -43,7 +44,8 @@ try {
     Write-Host "📥 Cloning wiki repository..." -ForegroundColor Cyan
     git clone $WikiUrl $tempWikiPath
 
-    if (-not (Test-Path $tempWikiPath)) {
+    if (-not (Test-Path $tempWikiPath))
+    {
         throw "Failed to clone wiki repository"
     }
 
@@ -51,7 +53,8 @@ try {
     Write-Host "📋 Copying wiki files..." -ForegroundColor Cyan
     $wikiFiles = Get-ChildItem -Path $LocalWikiPath -Filter "*.md" -File
 
-    foreach ($file in $wikiFiles) {
+    foreach ($file in $wikiFiles)
+    {
         $destPath = Join-Path $tempWikiPath $file.Name
         Copy-Item -Path $file.FullName -Destination $destPath -Force
         Write-Host "  ✅ Copied: $($file.Name)" -ForegroundColor Green
@@ -60,14 +63,16 @@ try {
     # Change to wiki directory and commit changes
     Push-Location $tempWikiPath
 
-    try {
+    try
+    {
         # Add all changes
         git add .
 
         # Check if there are changes to commit
         $status = git status --porcelain
 
-        if ($status) {
+        if ($status)
+        {
             Write-Host "💾 Committing changes..." -ForegroundColor Cyan
             git commit -m $CommitMessage
 
@@ -75,11 +80,14 @@ try {
             git push origin master
 
             Write-Host "✅ Wiki updated successfully!" -ForegroundColor Green
-        } else {
+        }
+        else
+        {
             Write-Host "ℹ️  No changes to commit." -ForegroundColor Yellow
         }
     }
-    finally {
+    finally
+    {
         Pop-Location
     }
 
@@ -89,11 +97,13 @@ try {
 
     Write-Host "🎉 GitHub Wiki update completed!" -ForegroundColor Green
 }
-catch {
+catch
+{
     Write-Error "❌ Failed to update GitHub Wiki: $_"
 
     # Cleanup on error
-    if (Test-Path $tempWikiPath) {
+    if (Test-Path $tempWikiPath)
+    {
         Remove-Item -Path $tempWikiPath -Recurse -Force -ErrorAction SilentlyContinue
     }
 
