@@ -224,7 +224,6 @@ This project is licensed under the MIT License – see the
 
 - [ ] Additional DigitalOcean resource support (Droplets, Volumes, etc.)
 - [ ] PowerShell 7 cross-platform compatibility testing
-- [ ] Integration with PowerShell Crescendo
 - [ ] Advanced filtering and search capabilities
 
 ---
