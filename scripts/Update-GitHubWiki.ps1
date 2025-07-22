@@ -22,7 +22,7 @@
 
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)]
+    [Parameter()]
     [string]$WikiUrl = "https://github.com/Itamartz/PSDigitalOceanUsingSampler.wiki.git",
 
     [string]$LocalWikiPath = ".\wiki",
