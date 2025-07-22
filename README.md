@@ -4,16 +4,16 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-96.15%25-brightgreen.svg)](https://codecov.io/gh/your-username/PSDigitalOcean)
+[![Code Coverage](https://img.shields.io/badge/coverage-96.73%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **96.15% Test Coverage** with 170 comprehensive passing tests  
+✅ **96.73% Test Coverage** with 180 comprehensive passing tests  
    using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
-   Account, Team, Image, and Root objects  
+   Account, Team, Image, Region, and Root objects  
 ✅ **Comprehensive Error Handling** and defensive programming patterns  
    throughout  
 ✅ **CI/CD Pipeline** with Azure Pipelines configuration for automated  
@@ -82,6 +82,16 @@ Get-DigitalOceanImage -Type "application"
 Get-DigitalOceanImage -Type "distribution"
 ```
 
+### Get DigitalOcean Regions
+
+```powershell
+# Get regions with pagination
+Get-DigitalOceanRegion -Page 1 -Limit 20
+
+# Get all regions at once
+Get-DigitalOceanRegion -All
+```
+
 ### Working with Class Objects
 
 The module returns strongly-typed PowerShell class objects:
@@ -91,6 +101,12 @@ $account = Get-DigitalOceanAccount
 Write-Host "Account Email: $($account.email)"
 Write-Host "Droplet Limit: $($account.droplet_limit)"
 Write-Host "Team Name: $($account.team.name)"
+
+$regions = Get-DigitalOceanRegion -All
+foreach ($region in $regions) {
+    Write-Host "Region: $($region.ToString())"
+    Write-Host "Features: $($region.Features -join ', ')"
+}
 ```
 
 ## 🏗️ Architecture
@@ -102,6 +118,8 @@ Write-Host "Team Name: $($account.team.name)"
   team association
 - **DigitalOceanImage**: Represents DigitalOcean images with comprehensive  
   metadata and properties
+- **DigitalOceanRegion**: Represents DigitalOcean regions with features,  
+  availability, and supported sizes
 - **Root**: Container class for account responses
 
 ### API Integration
@@ -114,8 +132,8 @@ Write-Host "Team Name: $($account.team.name)"
 
 ### Test Coverage
 
-- **170 Tests** across all functionality
-- **96.15% Code Coverage** exceeding industry standards
+- **180 Tests** across all functionality
+- **96.73% Code Coverage** exceeding industry standards
 - **Unit Tests** for all public and private functions
 - **Integration Tests** for complete workflows
 - **Class Coverage Tests** ensuring all PowerShell classes work correctly
@@ -171,6 +189,7 @@ PSDigitalOcean/
 - `Get-DigitalOceanAccount` - Retrieve account information with pagination support
 - `Get-DigitalOceanImage` - Retrieve DigitalOcean images with filtering and  
   pagination support
+- `Get-DigitalOceanRegion` - Retrieve DigitalOcean regions with pagination support
 
 ### Private Functions
 
@@ -199,7 +218,7 @@ This project is licensed under the MIT License – see the
 
 - [DigitalOcean API Documentation](https://docs.digitalocean.com/reference/api/)
 - [PowerShell Gallery](https://www.powershellgallery.com/packages/PSDigitalOcean)
-- [Issue Tracker](https://github.com/Itamartz/PSDigitalOcean/issues)
+- [Issue Tracker](https://github.com/Itamartz/PSDigitalOceanUsingSampler/issues)
 
 ## 📈 Roadmap
 
