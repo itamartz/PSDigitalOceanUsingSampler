@@ -21,25 +21,21 @@ Welcome to the PSDigitalOcean PowerShell module documentation wiki!
 - [Class Architecture](Class-Architecture)
 - [Error Handling](Error-Handling)
 - [Pagination Patterns](Pagination-Patterns)
-- [API Integration](API-Integration)
 
 ### Development
 
 - [Contributing Guidelines](Contributing)
 - [Testing Framework](Testing)
 - [Build System](Build-System)
-- [Release Process](Release-Process)
 
 ### Examples
 
 - [Common Use Cases](Common-Use-Cases)
 - [Advanced Scenarios](Advanced-Scenarios)
-- [Automation Scripts](Automation-Scripts)
 
 ### Troubleshooting
 
 - [Common Issues](Common-Issues)
-- [API Error Codes](API-Error-Codes)
 - [Performance Tips](Performance-Tips)
 
 ## 🚀 Quick Links
