@@ -15,6 +15,7 @@ Welcome to the PSDigitalOcean PowerShell module documentation wiki!
 - [Get-DigitalOceanAccount](Get-DigitalOceanAccount)
 - [Get-DigitalOceanImage](Get-DigitalOceanImage)
 - [Get-DigitalOceanRegion](Get-DigitalOceanRegion)
+- [Get-DigitalOceanSize](Get-DigitalOceanSize)
 
 ### Advanced Topics
 
@@ -49,4 +50,4 @@ Welcome to the PSDigitalOcean PowerShell module documentation wiki!
 ## Last Updated
 
 This wiki is automatically updated with each release.  
-Last updated: 2025-07-22
+Last updated: 2025-07-27

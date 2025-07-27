@@ -8,6 +8,8 @@ when you create a ps1 file make sure to check the file using PSScriptAnalyzer ru
 
 When we create a new function make sure to add the function to the `source/Public/` folder and update the `source/PSDigitalOcean.psd1` file with the new function name and description, and update the `source/WikiSource/Home.md` file with the new function name and description, and create a new wiki page for the new function in the `wiki` folder.
 
+Before we commit the Wiki we need to check that date is correct in the `wiki/Home.md` file.
+
 ### Key Components
 
 - **Classes** (`source/Classes/`): PowerShell classes for strongly-typed objects (Account, Image, Team, etc.)
