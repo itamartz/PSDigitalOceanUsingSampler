@@ -4,6 +4,8 @@
 
 This is a PowerShell module for DigitalOcean API integration built with the **Sampler framework**. The module follows enterprise-grade practices with class-based architecture, comprehensive testing, and modern CI/CD patterns.
 
+when you create a ps1 file make sure to check the psscript analyzer rules and the pester tests before committing.
+
 ### Key Components
 
 - **Classes** (`source/Classes/`): PowerShell classes for strongly-typed objects (Account, Image, Team, etc.)
