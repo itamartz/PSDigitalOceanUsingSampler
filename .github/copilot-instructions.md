@@ -4,7 +4,9 @@
 
 This is a PowerShell module for DigitalOcean API integration built with the **Sampler framework**. The module follows enterprise-grade practices with class-based architecture, comprehensive testing, and modern CI/CD patterns.
 
-when you create a ps1 file make sure to check the psscript analyzer rules and the pester tests before committing.
+when you create a ps1 file make sure to check the file using PSScriptAnalyzer rules and the Pester tests before committing.
+
+When we create a new function make sure to add the function to the `source/Public/` folder and update the `source/PSDigitalOcean.psd1` file with the new function name and description, and update the `source/WikiSource/Home.md` file with the new function name and description, and create a new wiki page for the new function in the `wiki` folder.
 
 ### Key Components
 

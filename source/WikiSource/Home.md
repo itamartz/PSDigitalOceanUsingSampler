@@ -63,6 +63,12 @@ test coverage.
    
    # Get all available sizes
    Get-DigitalOceanSize -All
+   
+   # Get Ubuntu images
+   Get-DigitalOceanImage -Type distribution -Distribution ubuntu
+   
+   # Get all regions
+   Get-DigitalOceanRegion
    ```
 
 ## Navigation
@@ -70,7 +76,7 @@ test coverage.
 - [[Get-DigitalOceanAccount]] - Account management
 - [[Get-DigitalOceanImage]] - Image management  
 - [[Get-DigitalOceanRegion]] - Region information
-- [[Get-DigitalOceanSize]] - Size specifications
+- [[Get-DigitalOceanSize]] - Size specifications and Droplet sizing
 - [[API-Integration]] - Core API functionality
 - [[PowerShell-Classes]] - Class architecture
 - [[Development-Guide]] - Contributing guidelines
