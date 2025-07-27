@@ -19,31 +19,31 @@ Describe $DescribeName {
                     return [PSCustomObject]@{
                         sizes = @(
                             [PSCustomObject]@{
-                                slug = 's-1vcpu-1gb'
-                                memory = 1024
-                                vcpus = 1
-                                disk = 25
-                                transfer = 1
+                                slug          = 's-1vcpu-1gb'
+                                memory        = 1024
+                                vcpus         = 1
+                                disk          = 25
+                                transfer      = 1
                                 price_monthly = 5.0
-                                price_hourly = 0.00744
-                                regions = @('nyc1', 'nyc2', 'nyc3')
-                                available = $true
-                                description = 'Basic'
+                                price_hourly  = 0.00744
+                                regions       = @('nyc1', 'nyc2', 'nyc3')
+                                available     = $true
+                                description   = 'Basic'
                             },
                             [PSCustomObject]@{
-                                slug = 's-2vcpu-2gb'
-                                memory = 2048
-                                vcpus = 2
-                                disk = 50
-                                transfer = 2
+                                slug          = 's-2vcpu-2gb'
+                                memory        = 2048
+                                vcpus         = 2
+                                disk          = 50
+                                transfer      = 2
                                 price_monthly = 12.0
-                                price_hourly = 0.01786
-                                regions = @('nyc1', 'nyc2', 'nyc3')
-                                available = $true
-                                description = 'Regular'
+                                price_hourly  = 0.01786
+                                regions       = @('nyc1', 'nyc2', 'nyc3')
+                                available     = $true
+                                description   = 'Regular'
                             }
                         )
-                        meta = [PSCustomObject]@{
+                        meta  = [PSCustomObject]@{
                             total = 2
                         }
                     }
@@ -77,11 +77,11 @@ Describe $DescribeName {
             InModuleScope $script:dscModuleName {
                 $result = Get-DigitalOceanSize
                 $result | Should -HaveCount 2
-                $result[0] | Should -BeOfType [DigitalOceanSize]
+                $result[0].PSObject.TypeNames[0] | Should -Be 'DigitalOceanSize'
                 $result[0].Slug | Should -Be 's-1vcpu-1gb'
                 $result[0].Memory | Should -Be 1024
                 $result[0].Vcpus | Should -Be 1
-                $result[1] | Should -BeOfType [DigitalOceanSize]
+                $result[1].PSObject.TypeNames[0] | Should -Be 'DigitalOceanSize'
                 $result[1].Slug | Should -Be 's-2vcpu-2gb'
                 $result[1].Memory | Should -Be 2048
                 $result[1].Vcpus | Should -Be 2
@@ -93,7 +93,7 @@ Describe $DescribeName {
                 Mock Invoke-DigitalOceanAPI {
                     return [PSCustomObject]@{
                         sizes = @()
-                        meta = [PSCustomObject]@{
+                        meta  = [PSCustomObject]@{
                             total = 0
                         }
                     }
@@ -123,23 +123,24 @@ Describe $DescribeName {
                 $script:callCount = 0
                 Mock Invoke-DigitalOceanAPI {
                     $script:callCount++
-                    if ($script:callCount -eq 1) {
+                    if ($script:callCount -eq 1)
+                    {
                         return [PSCustomObject]@{
                             sizes = @(
                                 [PSCustomObject]@{
-                                    slug = 's-1vcpu-1gb'
-                                    memory = 1024
-                                    vcpus = 1
-                                    disk = 25
-                                    transfer = 1
+                                    slug          = 's-1vcpu-1gb'
+                                    memory        = 1024
+                                    vcpus         = 1
+                                    disk          = 25
+                                    transfer      = 1
                                     price_monthly = 5.0
-                                    price_hourly = 0.00744
-                                    regions = @('nyc1', 'nyc2', 'nyc3')
-                                    available = $true
-                                    description = 'Basic'
+                                    price_hourly  = 0.00744
+                                    regions       = @('nyc1', 'nyc2', 'nyc3')
+                                    available     = $true
+                                    description   = 'Basic'
                                 }
                             )
-                            meta = [PSCustomObject]@{
+                            meta  = [PSCustomObject]@{
                                 total = 2
                             }
                             links = [PSCustomObject]@{
@@ -148,23 +149,25 @@ Describe $DescribeName {
                                 }
                             }
                         }
-                    } else {
+                    }
+                    else
+                    {
                         return [PSCustomObject]@{
                             sizes = @(
                                 [PSCustomObject]@{
-                                    slug = 's-2vcpu-2gb'
-                                    memory = 2048
-                                    vcpus = 2
-                                    disk = 50
-                                    transfer = 2
+                                    slug          = 's-2vcpu-2gb'
+                                    memory        = 2048
+                                    vcpus         = 2
+                                    disk          = 50
+                                    transfer      = 2
                                     price_monthly = 12.0
-                                    price_hourly = 0.01786
-                                    regions = @('nyc1', 'nyc2', 'nyc3')
-                                    available = $true
-                                    description = 'Regular'
+                                    price_hourly  = 0.01786
+                                    regions       = @('nyc1', 'nyc2', 'nyc3')
+                                    available     = $true
+                                    description   = 'Regular'
                                 }
                             )
-                            meta = [PSCustomObject]@{
+                            meta  = [PSCustomObject]@{
                                 total = 2
                             }
                             links = [PSCustomObject]@{
@@ -209,7 +212,7 @@ Describe $DescribeName {
                 Mock Invoke-DigitalOceanAPI {
                     return [PSCustomObject]@{
                         sizes = @()
-                        meta = [PSCustomObject]@{
+                        meta  = [PSCustomObject]@{
                             total = 0
                         }
                         links = [PSCustomObject]@{
@@ -230,19 +233,19 @@ Describe $DescribeName {
                     return [PSCustomObject]@{
                         sizes = @(
                             [PSCustomObject]@{
-                                slug = 's-1vcpu-1gb'
-                                memory = 1024
-                                vcpus = 1
-                                disk = 25
-                                transfer = 1
+                                slug          = 's-1vcpu-1gb'
+                                memory        = 1024
+                                vcpus         = 1
+                                disk          = 25
+                                transfer      = 1
                                 price_monthly = 5.0
-                                price_hourly = 0.00744
-                                regions = @('nyc1', 'nyc2', 'nyc3')
-                                available = $true
-                                description = 'Basic'
+                                price_hourly  = 0.00744
+                                regions       = @('nyc1', 'nyc2', 'nyc3')
+                                available     = $true
+                                description   = 'Basic'
                             }
                         )
-                        meta = [PSCustomObject]@{
+                        meta  = [PSCustomObject]@{
                             total = 1
                         }
                     }
@@ -260,17 +263,33 @@ Describe $DescribeName {
 
     Context "When testing parameter validation" {
         It "10 - Should validate Page parameter range" {
-            { Get-DigitalOceanSize -Page 0 } | Should -Throw
-            { Get-DigitalOceanSize -Page 1001 } | Should -Throw
-            { Get-DigitalOceanSize -Page 1 } | Should -Not -Throw
-            { Get-DigitalOceanSize -Page 1000 } | Should -Not -Throw
+            InModuleScope $script:dscModuleName {
+                Mock Invoke-DigitalOceanAPI {
+                    return [PSCustomObject]@{
+                        sizes = @()
+                        meta  = [PSCustomObject]@{ total = 0 }
+                    }
+                }
+                { Get-DigitalOceanSize -Page 0 } | Should -Throw
+                { Get-DigitalOceanSize -Page 1001 } | Should -Throw
+                { Get-DigitalOceanSize -Page 1 } | Should -Not -Throw
+                { Get-DigitalOceanSize -Page 1000 } | Should -Not -Throw
+            }
         }
 
         It "11 - Should validate Limit parameter range" {
-            { Get-DigitalOceanSize -Limit 19 } | Should -Throw
-            { Get-DigitalOceanSize -Limit 201 } | Should -Throw
-            { Get-DigitalOceanSize -Limit 20 } | Should -Not -Throw
-            { Get-DigitalOceanSize -Limit 200 } | Should -Not -Throw
+            InModuleScope $script:dscModuleName {
+                Mock Invoke-DigitalOceanAPI {
+                    return [PSCustomObject]@{
+                        sizes = @()
+                        meta  = [PSCustomObject]@{ total = 0 }
+                    }
+                }
+                { Get-DigitalOceanSize -Limit 19 } | Should -Throw
+                { Get-DigitalOceanSize -Limit 201 } | Should -Throw
+                { Get-DigitalOceanSize -Limit 20 } | Should -Not -Throw
+                { Get-DigitalOceanSize -Limit 200 } | Should -Not -Throw
+            }
         }
 
         It "12 - Should not allow Page/Limit with All parameter" {
@@ -295,13 +314,13 @@ Describe $DescribeName {
                     return [PSCustomObject]@{
                         sizes = @(
                             [PSCustomObject]@{
-                                slug = 's-incomplete'
+                                slug   = 's-incomplete'
                                 memory = $null
-                                vcpus = 1
+                                vcpus  = 1
                                 # Missing other properties
                             }
                         )
-                        meta = [PSCustomObject]@{
+                        meta  = [PSCustomObject]@{
                             total = 1
                         }
                     }

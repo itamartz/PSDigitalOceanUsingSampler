@@ -30,7 +30,7 @@
     Copyright            = '(c) Itamar Tziger. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description          = 'A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage. Features class-based architecture, robust error handling, and 98%+ test coverage.'
+    Description          = 'A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage (96.16% with 205 tests). Features class-based architecture, robust error handling, and complete API integration.'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion    = '5.0'
