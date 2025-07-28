@@ -162,7 +162,7 @@ foreach ($size in $sizes) {
 - **205 Tests** across all functionality
 - **96.16% Code Coverage** exceeding industry standards
 - **Unit Tests** for all public and private functions
-- **Integration Tests** for complete workflows
+- **Integration Tests** for real DigitalOcean API interaction scenarios
 - **Class Coverage Tests** ensuring all PowerShell classes work correctly
 
 ### Quality Assurance
@@ -204,6 +204,7 @@ PSDigitalOcean/
 │   └── en-US/            # Help documentation
 ├── tests/
 │   ├── Unit/             # Unit tests for all functions
+│   ├── Integration/      # Integration tests for real API scenarios
 │   └── QA/               # Quality assurance tests
 ├── output/               # Build artifacts
 └── build.ps1             # Build script
