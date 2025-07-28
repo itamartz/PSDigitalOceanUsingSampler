@@ -23,13 +23,37 @@
         "vscode": {
             // Set *default* container specific settings.json values on container create.
             "settings": {
-                "terminal.integrated.defaultProfile.linux": "pwsh"
+                "terminal.integrated.defaultProfile.linux": "pwsh",
+                "powershell.codeFormatting.openBraceOnSameLine": false,
+                "powershell.codeFormatting.newLineAfterOpenBrace": true,
+                "powershell.codeFormatting.newLineAfterCloseBrace": true,
+                "powershell.codeFormatting.whitespaceBeforeOpenBrace": true,
+                "powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+                "powershell.codeFormatting.whitespaceAroundOperator": true,
+                "powershell.codeFormatting.whitespaceAfterSeparator": true,
+                "powershell.codeFormatting.ignoreOneLineBlock": false,
+                "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationAfterEveryPipeline",
+                "powershell.codeFormatting.preset": "Custom",
+                "powershell.codeFormatting.alignPropertyValuePairs": true,
+                "powershell.developer.bundledModulesPath": "${containerWorkspaceFolder}/output/RequiredModules",
+                "powershell.scriptAnalysis.settingsPath": ".vscode/analyzersettings.psd1",
+                "powershell.scriptAnalysis.enable": true,
+                "powershell.pester.codeLens": false,
+                "files.trimTrailingWhitespace": true,
+                "files.trimFinalNewlines": true,
+                "files.insertFinalNewline": true,
+                "files.associations": {
+                    "*.ps1xml": "xml"
+                },
+                "[markdown]": {
+                    "files.trimTrailingWhitespace": false,
+                    "files.encoding": "utf8"
+                }
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
                 "ms-vscode.powershell",
                 "pspester.pester-test",
-                "ms-vscode.powershell",
                 "ironmansoftware.powershellprotools",
                 "humao.rest-client",
                 "redhat.vscode-yaml",
