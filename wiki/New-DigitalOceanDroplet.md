@@ -133,7 +133,14 @@ Creates a basic Ubuntu 20.04 Droplet with 1GB RAM and 1 vCPU.
 ### Example 2: Create a Droplet with backups and monitoring
 
 ```powershell
-New-DigitalOceanDroplet -DropletName "web-server" -Size "s-2vcpu-2gb" -Image "ubuntu-20-04-x64" -Backups $true -Monitoring $true
+$dropletParams = @{
+    DropletName = "web-server"
+    Size        = "s-2vcpu-2gb"
+    Image       = "ubuntu-20-04-x64"
+    Backups     = $true
+    Monitoring  = $true
+}
+New-DigitalOceanDroplet @dropletParams
 ```
 
 Creates a Droplet with automated backups and monitoring enabled.
@@ -142,7 +149,13 @@ Creates a Droplet with automated backups and monitoring enabled.
 
 ```powershell
 $sshKey = Get-DigitalOceanSSHKey | Where-Object { $_.name -eq "my-key" }
-New-DigitalOceanDroplet -DropletName "secure-server" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -SSHKey $sshKey
+$dropletParams = @{
+    DropletName = "secure-server"
+    Size        = "s-1vcpu-1gb"
+    Image       = "ubuntu-20-04-x64"
+    SSHKey      = $sshKey
+}
+New-DigitalOceanDroplet @dropletParams
 ```
 
 Creates a Droplet with SSH key authentication configured.
@@ -158,7 +171,13 @@ systemctl start nginx
 systemctl enable nginx
 "@
 
-New-DigitalOceanDroplet -DropletName "web-server" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -UserData $userData
+$dropletParams = @{
+    DropletName = "web-server"
+    Size        = "s-1vcpu-1gb"
+    Image       = "ubuntu-20-04-x64"
+    UserData    = $userData
+}
+New-DigitalOceanDroplet @dropletParams
 ```
 
 Creates a Droplet with a user data script that installs and starts nginx.
@@ -166,7 +185,13 @@ Creates a Droplet with a user data script that installs and starts nginx.
 ### Example 5: Create a Droplet with tags
 
 ```powershell
-New-DigitalOceanDroplet -DropletName "api-server" -Size "s-2vcpu-4gb" -Image "ubuntu-20-04-x64" -Tags @("production", "api", "backend")
+$dropletParams = @{
+    DropletName = "api-server"
+    Size        = "s-2vcpu-4gb"
+    Image       = "ubuntu-20-04-x64"
+    Tags        = @("production", "api", "backend")
+}
+New-DigitalOceanDroplet @dropletParams
 ```
 
 Creates a Droplet with multiple tags for organization and management.
@@ -175,18 +200,20 @@ Creates a Droplet with multiple tags for organization and management.
 
 ```powershell
 $sshKey = Get-DigitalOceanSSHKey | Where-Object { $_.name -eq "production-key" }
-$userData = "#!/bin/bash\necho 'Production server setup' >> /var/log/setup.log"
+$userData = "#!/bin/bash`necho 'Production server setup' >> /var/log/setup.log"
 
-New-DigitalOceanDroplet `
-    -DropletName "prod-web-01" `
-    -Size "s-4vcpu-8gb" `
-    -Image "ubuntu-20-04-x64" `
-    -SSHKey $sshKey `
-    -Backups $true `
-    -IPV6 $true `
-    -Monitoring $true `
-    -Tags @("production", "web", "load-balanced") `
-    -UserData $userData
+$dropletParams = @{
+    DropletName = "prod-web-01"
+    Size        = "s-4vcpu-8gb"
+    Image       = "ubuntu-20-04-x64"
+    SSHKey      = $sshKey
+    Backups     = $true
+    IPV6        = $true
+    Monitoring  = $true
+    Tags        = @("production", "web", "load-balanced")
+    UserData    = $userData
+}
+New-DigitalOceanDroplet @dropletParams
 ```
 
 Creates a production-ready Droplet with all available features enabled.
@@ -194,7 +221,13 @@ Creates a production-ready Droplet with all available features enabled.
 ### Example 7: Use -WhatIf to preview the operation
 
 ```powershell
-New-DigitalOceanDroplet -DropletName "test-server" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -WhatIf
+$dropletParams = @{
+    DropletName = "test-server"
+    Size        = "s-1vcpu-1gb"
+    Image       = "ubuntu-20-04-x64"
+    WhatIf      = $true
+}
+New-DigitalOceanDroplet @dropletParams
 ```
 
 Shows what would happen when creating the Droplet without actually creating it.
