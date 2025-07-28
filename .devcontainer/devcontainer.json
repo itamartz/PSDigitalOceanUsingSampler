@@ -16,7 +16,7 @@
         "DIGITALOCEAN_TOKEN": "3fc0948b-d865-4042-9d8e-adbe2041aa33",
         "POWERSHELL_UPDATECHECK": "Off"
     },
-    "postCreateCommand": "apt-get update && apt-get install -y git curl wget && pwsh -Command 'Install-Module -Name Pester -Force -SkipPublisherCheck'",
+    "postCreateCommand": "wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && sudo dpkg -i packages-microsoft-prod.deb && sudo apt-get update && sudo apt-get install -y powershell && sudo chsh vscode -s \"$(which pwsh)\"",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
