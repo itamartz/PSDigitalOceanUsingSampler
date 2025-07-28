@@ -3,7 +3,7 @@
 {
     "name": "PSDigitalOcean-Windows",
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "image": "mcr.microsoft.com/powershell:lts-windowsservercore-ltsc2022",
+    "image": "mcr.microsoft.com/powershell:7.5-windowsservercore-ltsc2022",
     "features": {
         "ghcr.io/devcontainers/features/powershell:1": {
             "version": "latest"
