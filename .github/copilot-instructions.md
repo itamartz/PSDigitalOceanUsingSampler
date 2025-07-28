@@ -6,7 +6,7 @@ This is a PowerShell module for DigitalOcean API integration built with the **Sa
 
 when you create a ps1 file make sure to check the file using PSScriptAnalyzer rules and the Pester tests before committing.
 
-When we create a new function make sure to add the function to the `source/Public/` folder and update the `source/PSDigitalOcean.psd1` file with the new function name and description, and update the `source/WikiSource/Home.md` file with the new function name and description, and create a new wiki page for the new function in the `wiki` folder.
+When we create a new function make sure to add the function to the `source/Public/` folder and update the `source/PSDigitalOcean.psd1` file with the new function name and description, and update the `wiki/Home.md` file with the new function name and description, and create a new wiki page for the new function in the `wiki` folder.
 
 Before we commit the Wiki we need to check that date is correct in the `wiki/Home.md` file.
 
