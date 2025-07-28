@@ -37,6 +37,7 @@
                 "powershell.codeFormatting.alignPropertyValuePairs": true,
                 "powershell.developer.bundledModulesPath": "${containerWorkspaceFolder}/output/RequiredModules",
                 "powershell.scriptAnalysis.settingsPath": ".vscode/analyzersettings.psd1",
+                "terminal.integrated.enablePersistentSessions": false,
                 "powershell.scriptAnalysis.enable": true,
                 "powershell.pester.codeLens": false,
                 "files.trimTrailingWhitespace": true,
