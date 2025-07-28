@@ -11,12 +11,12 @@ Learn how to configure the PSDigitalOcean module for use with your DigitalOcean 
 ## Getting Your API Token
 
 1. Log in to your [DigitalOcean Control Panel](https://cloud.digitalocean.com/)
-2. Navigate to **API** section in the left sidebar
-3. Click **Generate New Token**
-4. Enter a descriptive name for your token
-5. Select appropriate scopes (Read/Write recommended)
-6. Click **Generate Token**
-7. **Important**: Copy the token immediately - it won't be shown again!
+1. Navigate to **API** section in the left sidebar
+1. Click **Generate New Token**
+1. Enter a descriptive name for your token
+1. Select appropriate scopes (Read/Write recommended)
+1. Click **Generate Token**
+1. **Important**: Copy the token immediately - it won't be shown again!
 
 ## Setting Up the API Token
 
@@ -98,23 +98,27 @@ if (Get-Module -ListAvailable PSDigitalOcean) {
 
 ### Common Issues
 
-**Error: "No DIGITALOCEAN_TOKEN environment variable found"**
+## Error: "No DIGITALOCEAN_TOKEN environment variable found"
+
 - Ensure the environment variable is set correctly
 - Restart PowerShell after setting system-wide variables
 - Verify the variable name is exactly `DIGITALOCEAN_TOKEN`
 
-**Error: "401 Unauthorized"**
+## Error: "401 Unauthorized"
+
 - Check that your API token is valid and not expired
 - Verify the token has appropriate scopes
 - Regenerate the token if necessary
 
-**Error: "Module not found"**
+## Error: "Module not found"
+
 - Ensure PSDigitalOcean is installed: `Get-Module -ListAvailable PSDigitalOcean`
 - Try importing explicitly: `Import-Module PSDigitalOcean -Force`
 
 ### Getting Help
 
 If you need assistance:
+
 - Check the [Common Issues](Common-Issues) page
 - Review the [API Error Codes](API-Error-Codes) documentation
 - Submit an issue on [GitHub](https://github.com/Itamartz/PSDigitalOceanUsingSampler/issues)
