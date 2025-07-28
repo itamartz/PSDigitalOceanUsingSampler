@@ -1,22 +1,19 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/powershell
 {
-    "name": "PSDigitalOcean-Linux",
+    "name": "PSDigitalOcean-Windows",
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "image": "mcr.microsoft.com/powershell:lts-debian-11",
+    "image": "mcr.microsoft.com/powershell:lts-windowsservercore-ltsc2022",
     "features": {
-        "ghcr.io/devcontainers/features/common-utils:2": {
-            "installZsh": "true",
-            "username": "vscode",
-            "upgradePackages": "false",
-            "nonFreePackages": "true"
+        "ghcr.io/devcontainers/features/powershell:1": {
+            "version": "latest"
         }
     },
     "containerEnv": {
         "DIGITALOCEAN_TOKEN": "3fc0948b-d865-4042-9d8e-adbe2041aa33",
         "POWERSHELL_UPDATECHECK": "Off"
     },
-    "postCreateCommand": "apt-get update && apt-get install -y git curl wget && pwsh -Command 'Install-Module -Name Pester -Force -SkipPublisherCheck'",
+    "postCreateCommand": "pwsh -Command \"Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; Install-Module -Name Pester -Force -SkipPublisherCheck\"",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
@@ -24,7 +21,7 @@
             // Set *default* container specific settings.json values on container create.
             "settings": {
                 "github.copilot.nextEditSuggestions.enabled": true,
-                "terminal.integrated.defaultProfile.linux": "pwsh",
+                "terminal.integrated.defaultProfile.windows": "PowerShell",
                 "powershell.codeFormatting.openBraceOnSameLine": false,
                 "powershell.codeFormatting.newLineAfterOpenBrace": true,
                 "powershell.codeFormatting.newLineAfterCloseBrace": true,
@@ -36,8 +33,8 @@
                 "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationAfterEveryPipeline",
                 "powershell.codeFormatting.preset": "Custom",
                 "powershell.codeFormatting.alignPropertyValuePairs": true,
-                "powershell.developer.bundledModulesPath": "${containerWorkspaceFolder}/output/RequiredModules",
-                "powershell.scriptAnalysis.settingsPath": ".vscode/analyzersettings.psd1",
+                "powershell.developer.bundledModulesPath": "${containerWorkspaceFolder}\\output\\RequiredModules",
+                "powershell.scriptAnalysis.settingsPath": ".vscode\\analyzersettings.psd1",
                 "terminal.integrated.enablePersistentSessions": false,
                 "powershell.scriptAnalysis.enable": true,
                 "powershell.pester.codeLens": false,
