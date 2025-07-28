@@ -86,3 +86,10 @@ This ensures proper dependency resolution during module compilation.
 
 - **Issue Tracking**: Use GitHub Issues for bug reports and feature requests
 - **Commit Messages**: Follow conventional commit standards for clarity, ensure README file update with code coverage and test counts
+
+## PSSScriptAnalyzer and Pester
+
+When you create a new function make sure that the function passes the PSScriptAnalyzer rules:
+
+- 'should not have the open brace on the same line as the statement.'
+- 'should not use the `Write-Host` cmdlet.'

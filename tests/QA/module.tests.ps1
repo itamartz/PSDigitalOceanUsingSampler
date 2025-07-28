@@ -2,7 +2,21 @@ BeforeDiscovery {
     $projectPath = "$($PSScriptRoot)\..\.." | Convert-Path
 
     <#
-        If the QA tests are run outside of the build script (e.g with Invoke-Pester)
+        If the QA tests are ru    It 'Should pass Script Analyzer for <n>' -ForEach $testCases -Skip:(-not $scriptAnalyzerRules) {
+        $functionFile = Get-ChildItem -Path $sourcePath -Recurse -Include "$Name.ps1"
+
+        # Use custom PSScriptAnalyzer settings if available
+        $settingsPath = Join-Path $projectPath 'PSScriptAnalyzerSettings.psd1'
+        if (Test-Path $settingsPath) {
+            $pssaResult = (Invoke-ScriptAnalyzer -Path $functionFile.FullName -Settings $settingsPath)
+        } else {
+            $pssaResult = (Invoke-ScriptAnalyzer -Path $functionFile.FullName)
+        }
+
+        $report = $pssaResult | Format-Table -AutoSize | Out-String -Width 110
+        $pssaResult | Should -BeNullOrEmpty -Because `
+            "some rule triggered.`r`n`r`n $report"
+    }e of the build script (e.g with Invoke-Pester)
         the parent scope has not set the variable $ProjectName.
     #>
     if (-not $ProjectName)
@@ -213,4 +227,3 @@ Describe 'Help for module' -Tags 'helpQuality' {
         }
     }
 }
-

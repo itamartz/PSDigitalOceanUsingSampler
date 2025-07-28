@@ -76,6 +76,10 @@ BuildWorkflow:
     - Convert_Pester_Coverage
     # - Pester_if_Code_Coverage_Under_Threshold
 
+  # Integration tests that require real API access
+  integration:
+    - Pester_Integration_Tests
+
   # Use this task when you have multiple parallel tests, which produce multiple
   # code coverage files and needs to get merged into one file.
   #merge:
@@ -148,6 +152,17 @@ Pester:
   # CodeCoverageOutputFile is the file that is created for each pipeline test job.
   #CodeCoverageOutputFile: JaCoCo_Merge.xml
 
+# Configuration for integration tests
+PesterIntegration:
+  OutputFormat: NUnitXML
+  Script:
+    - tests/Integration
+  Tag:
+    - Integration
+  ExcludeTag:
+  # Skip code coverage for integration tests as they test real API calls
+  CodeCoverageThreshold: 0
+
 # Use this to merged code coverage from several pipeline test jobs.
 # CodeCoverageFilePattern      - the pattern used to search all pipeline test job artifacts
 #                                after the file specified in CodeCoverageOutputFile.
@@ -163,6 +178,7 @@ DscTest:
   Tag:
   ExcludeSourceFile:
     - output
+    - tests/Integration  # Exclude integration tests from DSC analyzer rules
   ExcludeModuleFile:
     - Modules/DscResource.Common
   #  - Templates
