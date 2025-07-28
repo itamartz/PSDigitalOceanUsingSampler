@@ -75,6 +75,8 @@ This ensures proper dependency resolution during module compilation.
 - Avoid null-coalescing operators (`??`) - use traditional null checks
 - Use `Write-Output` for proper array handling in return statements
 - Test coverage includes PowerShell 5.1 compatibility validation
+- When function have more than 4 parameters, use splatting in example for better readability
+- Use `-WhatIf` and `-Confirm` parameters for destructive actions
 
 ## Key Files to Reference
 
