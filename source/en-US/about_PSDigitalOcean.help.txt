@@ -11,11 +11,12 @@ LONG DESCRIPTION
     comprehensive error handling, and extensive test coverage (96.16% with
     205 tests).
 
-    The module includes four main public functions:
+    The module includes five main public functions:
     - Get-DigitalOceanAccount: Retrieve account information with pagination
     - Get-DigitalOceanImage: Retrieve DigitalOcean images with filtering
     - Get-DigitalOceanRegion: Retrieve DigitalOcean regions
     - Get-DigitalOceanSize: Retrieve DigitalOcean Droplet sizes
+    - New-DigitalOceanDroplet: Create new Droplets with comprehensive options
 
     All functions support pipeline input and return strongly-typed objects
     based on PowerShell classes for better integration with other cmdlets.
@@ -48,6 +49,15 @@ EXAMPLES
     # Get first 10 sizes
     PS C:\> Get-DigitalOceanSize -Page 1 -Limit 10
 
+    # Create a new Droplet
+    PS C:\> New-DigitalOceanDroplet -Name "my-server" -Region "nyc1" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64"
+
+    # Create a Droplet with SSH keys
+    PS C:\> New-DigitalOceanDroplet -Name "web-server" -Region "nyc1" -Size "s-2vcpu-2gb" -Image "ubuntu-20-04-x64" -SshKeys @("12:34:56:78:90:ab:cd:ef")
+
+    # Preview Droplet creation without actually creating it
+    PS C:\> New-DigitalOceanDroplet -Name "test-server" -Region "nyc1" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -WhatIf
+
 NOTE:
     Thank you to all those who contributed to this module, by writing code,
     sharing opinions, and provided feedback.
@@ -63,6 +73,7 @@ SEE ALSO
     - Get-Help Get-DigitalOceanImage
     - Get-Help Get-DigitalOceanRegion
     - Get-Help Get-DigitalOceanSize
+    - Get-Help New-DigitalOceanDroplet
 
 KEYWORDS
     DigitalOcean, API, Cloud, Infrastructure, PowerShell, Droplets, Images

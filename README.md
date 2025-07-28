@@ -92,6 +92,30 @@ Get-DigitalOceanSize -Page 1 -Limit 20
 Get-DigitalOceanSize -All
 ```
 
+### Create DigitalOcean Droplets
+
+```powershell
+# Create a basic droplet
+New-DigitalOceanDroplet -DropletName "web-server" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64"
+
+# Create a droplet with additional features
+New-DigitalOceanDroplet -DropletName "production-server" -Size "s-2vcpu-2gb" -Image "ubuntu-20-04-x64" -Backups $true -Monitoring $true -Tags @("production", "web")
+
+# Create a droplet with SSH key and user data
+$sshKey = Get-DigitalOceanSSHKey | Where-Object { $_.name -eq "my-key" }
+$userData = @"
+#!/bin/bash
+apt update
+apt install -y nginx
+systemctl start nginx
+"@
+
+New-DigitalOceanDroplet -DropletName "nginx-server" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -SSHKey $sshKey -UserData $userData
+
+# Preview droplet creation with -WhatIf
+New-DigitalOceanDroplet -DropletName "test-server" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -WhatIf
+```
+
 ### Working with Class Objects
 
 The module returns strongly-typed PowerShell class objects:
@@ -194,6 +218,8 @@ PSDigitalOcean/
   pagination support
 - `Get-DigitalOceanRegion` - Retrieve DigitalOcean regions with pagination support
 - `Get-DigitalOceanSize` - Retrieve DigitalOcean Droplet sizes with pagination support
+- `New-DigitalOceanDroplet` - Create new DigitalOcean Droplets with comprehensive  
+  configuration options including SSH keys, backups, monitoring, and user data
 
 ### Private Functions
 
@@ -227,7 +253,9 @@ This project is licensed under the MIT License – see the
 
 ## 📈 Roadmap
 
-- [ ] Additional DigitalOcean resource support (Droplets, Volumes, etc.)
+- [x] **Droplet Management** - Create DigitalOcean Droplets with comprehensive options
+- [ ] Additional DigitalOcean resource support (Volumes, Load Balancers, etc.)
+- [ ] Advanced Droplet management (Get, Update, Delete, Snapshots)
 - [ ] PowerShell 7 cross-platform compatibility testing
 - [ ] Advanced filtering and search capabilities
 
