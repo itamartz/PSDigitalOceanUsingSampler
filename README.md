@@ -4,13 +4,13 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-95.9%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-95.99%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **95.9% Test Coverage** with 287 comprehensive passing tests  
+✅ **95.99% Test Coverage** with 306 comprehensive passing tests  
    using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
    Account, Team, Image, Region, Size, and Root objects  
@@ -103,6 +103,19 @@ Get-DigitalOceanSSHKey
 
 # Get a specific SSH key by name
 Get-DigitalOceanSSHKey -SSHKeyName "my-laptop-key"
+```
+
+### Get VPCs (Virtual Private Clouds)
+
+```powershell
+# Get all VPCs
+Get-DigitalOceanVPC
+
+# Filter VPCs by name
+Get-DigitalOceanVPC | Where-Object { $_.name -like "*production*" }
+
+# Get specific VPC properties
+Get-DigitalOceanVPC | Select-Object name, ip_range, region
 ```
 
 ### Create DigitalOcean Droplets
@@ -236,6 +249,8 @@ PSDigitalOcean/
 - `Get-DigitalOceanSize` - Retrieve DigitalOcean Droplet sizes with pagination support
 - `Get-DigitalOceanSSHKey` - Retrieve SSH keys from DigitalOcean account with  
   filtering support
+- `Get-DigitalOceanVPC` - Retrieve Virtual Private Cloud (VPC) information from  
+  DigitalOcean account
 - `New-DigitalOceanDroplet` - Create new DigitalOcean Droplets with comprehensive  
   configuration options including SSH keys, backups, monitoring, and user data
 

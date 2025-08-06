@@ -18,6 +18,7 @@ Welcome to the PSDigitalOcean PowerShell module documentation wiki!
 - [Get-DigitalOceanRegion](Get-DigitalOceanRegion)
 - [Get-DigitalOceanSize](Get-DigitalOceanSize)
 - [Get-DigitalOceanSSHKey](Get-DigitalOceanSSHKey)
+- [Get-DigitalOceanVPC](Get-DigitalOceanVPC)
 - [New-DigitalOceanDroplet](New-DigitalOceanDroplet)
 
 ### Advanced Topics

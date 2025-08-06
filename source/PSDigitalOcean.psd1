@@ -76,6 +76,7 @@
         'Get-DigitalOceanRegion',
         'Get-DigitalOceanSize',
         'Get-DigitalOceanSSHKey',
+        'Get-DigitalOceanVPC',
         'New-DigitalOceanDroplet'
     )
 
