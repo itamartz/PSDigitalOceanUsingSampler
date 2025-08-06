@@ -12,6 +12,7 @@ Welcome to the PSDigitalOcean PowerShell module documentation wiki!
 
 ### Function Reference
 
+- [Add-DigitalOceanAPIToken](Add-DigitalOceanAPIToken)
 - [Get-DigitalOceanAccount](Get-DigitalOceanAccount)
 - [Get-DigitalOceanImage](Get-DigitalOceanImage)
 - [Get-DigitalOceanRegion](Get-DigitalOceanRegion)
@@ -51,4 +52,4 @@ Welcome to the PSDigitalOcean PowerShell module documentation wiki!
 ## Last Updated
 
 This wiki is automatically updated with each release.  
-Last updated: 2025-07-28
+Last updated: 2025-08-06

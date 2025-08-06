@@ -4,13 +4,13 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-96.16%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-95.72%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **96.16% Test Coverage** with 205 comprehensive passing tests  
+✅ **95.72% Test Coverage** with 268 comprehensive passing tests  
    using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
    Account, Team, Image, Region, Size, and Root objects  
@@ -46,7 +46,10 @@ cd PSDigitalOcean
 Before using the module, you need to set your DigitalOcean API token:
 
 ```powershell
-# Set your DigitalOcean API token as an environment variable
+# Method 1: Use the provided function (Recommended)
+Add-DigitalOceanAPIToken -Token "your-api-token-here"
+
+# Method 2: Set manually as environment variable
 [Environment]::SetEnvironmentVariable(
     "DIGITALOCEAN_TOKEN",
     "your-api-token-here",
@@ -159,8 +162,8 @@ foreach ($size in $sizes) {
 
 ### Test Coverage
 
-- **205 Tests** across all functionality
-- **96.16% Code Coverage** exceeding industry standards
+- **268 Tests** across all functionality
+- **95.72% Code Coverage** exceeding industry standards
 - **Unit Tests** for all public and private functions
 - **Integration Tests** for real DigitalOcean API interaction scenarios
 - **Class Coverage Tests** ensuring all PowerShell classes work correctly
@@ -214,6 +217,8 @@ PSDigitalOcean/
 
 ### Public Functions
 
+- `Add-DigitalOceanAPIToken` - Securely store DigitalOcean API token with  
+  cross-platform support
 - `Get-DigitalOceanAccount` - Retrieve account information with pagination support
 - `Get-DigitalOceanImage` - Retrieve DigitalOcean images with filtering and  
   pagination support

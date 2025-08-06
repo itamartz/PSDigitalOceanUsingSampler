@@ -15,7 +15,14 @@ Get up and running with PSDigitalOcean in minutes!
 Import-Module PSDigitalOcean
 ```
 
-### 2. Test Your Connection
+### 2. Configure Your API Token
+
+```powershell
+# Set your DigitalOcean API token
+Add-DigitalOceanAPIToken -Token "your-api-token-here"
+```
+
+### 3. Test Your Connection
 
 ```powershell
 # Get your account information
@@ -23,7 +30,7 @@ $account = Get-DigitalOceanAccount
 Write-Host "Welcome, $($account.email)!" -ForegroundColor Green
 ```
 
-### 3. Explore Available Regions
+### 4. Explore Available Regions
 
 ```powershell
 # Get all regions
@@ -35,7 +42,7 @@ $regions | ForEach-Object {
 }
 ```
 
-### 4. Browse Images
+### 5. Browse Images
 
 ```powershell
 # Get Ubuntu distributions

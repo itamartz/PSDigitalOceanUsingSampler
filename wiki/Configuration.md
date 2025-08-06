@@ -20,7 +20,21 @@ Learn how to configure the PSDigitalOcean module for use with your DigitalOcean 
 
 ## Setting Up the API Token
 
-### Method 1: Environment Variable (Recommended)
+### Method 1: Using Add-DigitalOceanAPIToken Function (Recommended)
+
+The easiest way to set your API token:
+
+```powershell
+# Import the module first
+Import-Module PSDigitalOcean
+
+# Set your API token (cross-platform compatible)
+Add-DigitalOceanAPIToken -Token "your-api-token-here"
+```
+
+This function automatically detects your operating system and uses the appropriate storage method.
+
+### Method 2: Environment Variable (Manual)
 
 Set the token as a persistent environment variable:
 
@@ -40,7 +54,7 @@ Set the token as a persistent environment variable:
 )
 ```
 
-### Method 2: Session Variable (Temporary)
+### Method 3: Session Variable (Temporary)
 
 Set the token for the current PowerShell session only:
 
