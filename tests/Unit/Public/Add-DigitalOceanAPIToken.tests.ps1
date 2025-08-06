@@ -150,23 +150,27 @@ Describe $DescribeName {
 
         It "16 - Should test Windows platform behavior by forcing User scope" {
             $testToken = "windows-coverage-test"
-            
+
             # On Windows, the function should use User scope
-            if ([System.Environment]::OSVersion.Platform -eq 'Win32NT') {
+            if ([System.Environment]::OSVersion.Platform -eq 'Win32NT')
+            {
                 # Capture verbose output to verify Windows path is taken
                 $verboseOutput = @()
                 $null = Add-DigitalOceanAPIToken -Token $testToken -Verbose 4>&1 | ForEach-Object {
-                    if ($_.GetType().Name -eq 'VerboseRecord') {
+                    if ($_.GetType().Name -eq 'VerboseRecord')
+                    {
                         $verboseOutput += $_.Message
                     }
                 }
-                
+
                 # Should contain Windows-specific verbose message
                 $verboseOutput -join ' ' | Should -Match "Windows.*User scope"
-                
+
                 # Clean up - remove the test token
                 [Environment]::SetEnvironmentVariable("DIGITALOCEAN_TOKEN", $null, [System.EnvironmentVariableTarget]::User)
-            } else {
+            }
+            else
+            {
                 # On Unix/Linux systems, test Process scope behavior
                 { Add-DigitalOceanAPIToken -Token $testToken } | Should -Not -Throw
             }
@@ -174,26 +178,29 @@ Describe $DescribeName {
 
         It "17 - Should test coverage of platform detection logic" {
             $testToken = "platform-detection-test"
-            
+
             # This test ensures we hit the platform detection code
             $currentPlatform = [System.Environment]::OSVersion.Platform
-            
+
             # Test the platform detection branch
-            if ($currentPlatform -eq 'Win32NT') {
+            if ($currentPlatform -eq 'Win32NT')
+            {
                 # Windows path - should set User scope
                 { Add-DigitalOceanAPIToken -Token $testToken } | Should -Not -Throw
-                
+
                 # Verify token was set in User scope
                 $userToken = [Environment]::GetEnvironmentVariable("DIGITALOCEAN_TOKEN", [System.EnvironmentVariableTarget]::User)
                 $userToken | Should -Be $testToken
-                
+
                 # Clean up
                 [Environment]::SetEnvironmentVariable("DIGITALOCEAN_TOKEN", $null, [System.EnvironmentVariableTarget]::User)
-            } else {
+            }
+            else
+            {
                 # Unix/Linux path - should show warning and use Process scope
                 $warningOutput = @()
                 $null = Add-DigitalOceanAPIToken -Token $testToken -WarningVariable warningOutput -WarningAction SilentlyContinue
-                
+
                 $warningOutput | Should -Not -BeNullOrEmpty
                 $warningOutput -join ' ' | Should -Match "current session only"
             }
@@ -202,20 +209,23 @@ Describe $DescribeName {
         It "18 - Should force coverage of error handling path" {
             # Create a test that might trigger the catch block
             $testToken = "error-path-test"
-            
+
             # Try to invoke the function in a controlled way to test error handling
             InModuleScope PSDigitalOcean {
                 param($Token)
-                
+
                 # Test that the try-catch structure works
                 $errorCaught = $false
-                try {
+                try
+                {
                     # This should normally succeed
                     Add-DigitalOceanAPIToken -Token $Token
-                } catch {
+                }
+                catch
+                {
                     $errorCaught = $true
                 }
-                
+
                 # Under normal conditions, no error should be caught
                 $errorCaught | Should -Be $false
             } -ArgumentList $testToken
@@ -226,15 +236,16 @@ Describe $DescribeName {
 
         It "19 - Should verify all verbose messages are generated" {
             $testToken = "verbose-coverage-test"
-            
+
             # Capture all verbose output to ensure complete coverage
             $verboseMessages = @()
             $null = Add-DigitalOceanAPIToken -Token $testToken -Verbose 4>&1 | ForEach-Object {
-                if ($_.GetType().Name -eq 'VerboseRecord') {
+                if ($_.GetType().Name -eq 'VerboseRecord')
+                {
                     $verboseMessages += $_.Message
                 }
             }
-            
+
             # Should have at least 3 verbose messages (preparing + platform-specific + success)
             $verboseMessages.Count | Should -BeGreaterOrEqual 3
             $verboseMessages -join ' ' | Should -Match "Preparing to set"
