@@ -75,6 +75,7 @@
         'Get-DigitalOceanImage',
         'Get-DigitalOceanRegion',
         'Get-DigitalOceanSize',
+        'Get-DigitalOceanSSHKey',
         'New-DigitalOceanDroplet'
     )
 

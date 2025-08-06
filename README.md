@@ -4,13 +4,13 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-95.72%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-95.9%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **95.72% Test Coverage** with 268 comprehensive passing tests  
+✅ **95.9% Test Coverage** with 287 comprehensive passing tests  
    using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
    Account, Team, Image, Region, Size, and Root objects  
@@ -95,6 +95,16 @@ Get-DigitalOceanSize -Page 1 -Limit 20
 Get-DigitalOceanSize -All
 ```
 
+### Get SSH Keys
+
+```powershell
+# Get all SSH keys
+Get-DigitalOceanSSHKey
+
+# Get a specific SSH key by name
+Get-DigitalOceanSSHKey -SSHKeyName "my-laptop-key"
+```
+
 ### Create DigitalOcean Droplets
 
 ```powershell
@@ -162,8 +172,8 @@ foreach ($size in $sizes) {
 
 ### Test Coverage
 
-- **268 Tests** across all functionality
-- **95.72% Code Coverage** exceeding industry standards
+- **287 Tests** across all functionality
+- **95.9% Code Coverage** exceeding industry standards
 - **Unit Tests** for all public and private functions
 - **Integration Tests** for real DigitalOcean API interaction scenarios
 - **Class Coverage Tests** ensuring all PowerShell classes work correctly
@@ -224,6 +234,8 @@ PSDigitalOcean/
   pagination support
 - `Get-DigitalOceanRegion` - Retrieve DigitalOcean regions with pagination support
 - `Get-DigitalOceanSize` - Retrieve DigitalOcean Droplet sizes with pagination support
+- `Get-DigitalOceanSSHKey` - Retrieve SSH keys from DigitalOcean account with  
+  filtering support
 - `New-DigitalOceanDroplet` - Create new DigitalOcean Droplets with comprehensive  
   configuration options including SSH keys, backups, monitoring, and user data
 

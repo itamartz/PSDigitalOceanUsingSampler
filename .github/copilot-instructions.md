@@ -95,3 +95,7 @@ When you create a new function make sure that the function passes the PSScriptAn
 
 - 'should not have the open brace on the same line as the statement.'
 - 'should not use the `Write-Host` cmdlet.'
+
+when you run .\build.ps1 -AutoRestore and it pass with 'Build succeeded' update the README.md file with the new code coverage and test counts, and create a new wiki page for the new function in the `wiki` folder.
+
+if you add a file to wiki folder dont forget to run the script in scripts\Update-GitHubWiki.ps1
