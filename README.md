@@ -185,8 +185,8 @@ foreach ($size in $sizes) {
 
 ### Test Coverage
 
-- **287 Tests** across all functionality
-- **95.9% Code Coverage** exceeding industry standards
+- **367 Tests** across all functionality
+- **96.25% Code Coverage** exceeding industry standards
 - **Unit Tests** for all public and private functions
 - **Integration Tests** for real DigitalOcean API interaction scenarios
 - **Class Coverage Tests** ensuring all PowerShell classes work correctly
