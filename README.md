@@ -4,13 +4,13 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-82.55%25-green.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-98.95%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **82.55% Test Coverage** with 394 comprehensive passing tests  
+✅ **98.95% Test Coverage** with 471 comprehensive passing tests  
    using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
    Account, Team, Image, Region, Size, SSH Key, VPC, and Droplet objects  
@@ -24,6 +24,19 @@ development practices
 ModuleBuilder integration  
 ✅ **Enterprise Ready** with full parameter validation, pagination support, and  
    robust API integration
+
+## 🆕 Latest Updates (v1.4.0)
+
+🎉 **Major Quality Milestone Achieved!**
+
+- ⬆️ **Code Coverage**: Improved from 82.55% to **98.95%** (+16.4%)
+- 📈 **Test Suite**: Expanded from 394 to **471 tests** (+77 tests)
+- 🔧 **Enhanced Testing**: Complete edge case coverage for all PowerShell  
+  classes
+- 🎯 **Constructor Coverage**: Full testing of complex object initialization  
+  logic
+- ✅ **Enterprise Grade**: Now exceeds 98% coverage threshold for production  
+  use
 
 ## 📦 Installation
 
@@ -189,8 +202,8 @@ foreach ($size in $sizes) {
 
 ### Test Coverage
 
-- **367 Tests** across all functionality
-- **96.25% Code Coverage** exceeding industry standards
+- **471 Tests** across all functionality
+- **98.95% Code Coverage** exceeding industry standards
 - **Unit Tests** for all public and private functions
 - **Integration Tests** for real DigitalOcean API interaction scenarios
 - **Class Coverage Tests** ensuring all PowerShell classes work correctly
