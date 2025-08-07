@@ -4,16 +4,16 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-96.25%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-82.55%25-green.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **96.25% Test Coverage** with 367 comprehensive passing tests  
+✅ **82.55% Test Coverage** with 394 comprehensive passing tests  
    using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
-   Account, Team, Image, Region, Size, and Root objects  
+   Account, Team, Image, Region, Size, SSH Key, VPC, and Droplet objects  
 ✅ **Comprehensive Error Handling** and defensive programming patterns  
    throughout  
 ✅ **CI/CD Pipeline** with Azure Pipelines configuration for automated  
@@ -112,10 +112,10 @@ Get-DigitalOceanSSHKey -SSHKeyName "my-laptop-key"
 Get-DigitalOceanVPC
 
 # Filter VPCs by name
-Get-DigitalOceanVPC | Where-Object { $_.name -like "*production*" }
+Get-DigitalOceanVPC | Where-Object { $_.Name -like "*production*" }
 
 # Get specific VPC properties
-Get-DigitalOceanVPC | Select-Object name, ip_range, region
+Get-DigitalOceanVPC | Select-Object Name, IpRange, Region
 ```
 
 ### Create DigitalOcean Droplets
@@ -173,6 +173,10 @@ foreach ($size in $sizes) {
   availability, and supported sizes
 - **DigitalOceanSize**: Represents DigitalOcean Droplet sizes with pricing,  
   specifications, and regional availability
+- **DigitalOceanVPC**: Represents DigitalOcean Virtual Private Clouds with  
+  network configuration and regional information
+- **DigitalOceanDroplet**: Represents DigitalOcean Droplets with comprehensive  
+  server configuration and status information
 - **Root**: Container class for account responses
 
 ### API Integration

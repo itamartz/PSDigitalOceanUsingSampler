@@ -15,18 +15,18 @@ function Get-DigitalOceanVPC
         Retrieves all VPCs in your DigitalOcean account.
 
     .EXAMPLE
-        Get-DigitalOceanVPC | Where-Object { $_.name -like "*production*" }
+        Get-DigitalOceanVPC | Where-Object { $_.Name -like "*production*" }
 
         Retrieves all VPCs and filters for those containing "production" in the name.
 
     .EXAMPLE
-        Get-DigitalOceanVPC | Select-Object name, ip_range, region
+        Get-DigitalOceanVPC | Select-Object Name, IpRange, Region
 
         Retrieves all VPCs and displays only the name, IP range, and region information.
 
     .OUTPUTS
-        System.Object[]
-        Returns an array of VPC objects containing information such as ID, name, IP range, region, and creation date.
+        DigitalOceanVPC
+        Returns an array of DigitalOceanVPC objects containing information such as ID, name, IP range, region, and creation date.
 
     .NOTES
         - Requires a valid DigitalOcean API token to be set in the DIGITALOCEAN_TOKEN environment variable
@@ -41,7 +41,7 @@ function Get-DigitalOceanVPC
     #>
 
     [CmdletBinding()]
-    [OutputType('DigitalOcean.Account.VPCs')]
+    [OutputType([DigitalOceanVPC])]
     param
     (
     )
@@ -59,15 +59,19 @@ function Get-DigitalOceanVPC
         if ($null -eq $response.vpcs)
         {
             Write-Warning "No VPCs found in your DigitalOcean account"
+            Write-Output @([DigitalOceanVPC[]]@())
             return
         }
 
         Write-Verbose "Found $($response.vpcs.Count) VPCs"
 
-        foreach ($vpc in $response.vpcs)
+        # Convert to DigitalOceanVPC class objects
+        $vpcObjects = foreach ($vpc in $response.vpcs)
         {
-            Write-Output $vpc
+            [DigitalOceanVPC]::new($vpc)
         }
+
+        Write-Output $vpcObjects
     }
     catch
     {

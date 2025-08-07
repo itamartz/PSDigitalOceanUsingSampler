@@ -11,6 +11,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.3.0] - 2025-08-07
+
+### Added
+
+- Added `DigitalOceanVPC` PowerShell class with comprehensive VPC property structure
+- Added class-based architecture support for VPC (Virtual Private Cloud) resources
+- Enhanced `Get-DigitalOceanVPC` function to return strongly-typed  
+  DigitalOceanVPC objects
+- Added comprehensive unit tests for DigitalOceanVPC class (27 test cases)
+
+### Changed
+
+- Updated `Get-DigitalOceanVPC` function to use class-based output instead of PSObject
+- Enhanced VPC function documentation with Pascal case property examples
+- Improved test coverage and consistency across all VPC-related functionality
+
+### Fixed
+
+- Fixed VPC function tests to properly expect class-based objects
+- Corrected property naming consistency (Pascal case) in VPC examples and documentation
+
 ## [1.2.0] - 2025-08-07
 
 ### Added

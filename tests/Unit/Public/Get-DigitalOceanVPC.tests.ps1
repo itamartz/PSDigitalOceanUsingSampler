@@ -45,7 +45,7 @@ Describe "$DescribeName Unit Tests" -Tag 'Unit' {
 
         It "4 - Should have proper output type defined" {
             $command = Get-Command Get-DigitalOceanVPC
-            $command.OutputType.Name | Should -Contain 'DigitalOcean.Account.VPCs'
+            $command.OutputType.Type.Name | Should -Contain 'DigitalOceanVPC'
         }
     }
 
@@ -83,13 +83,14 @@ Describe "$DescribeName Unit Tests" -Tag 'Unit' {
             } -ModuleName $script:dscModuleName
         }
 
-        It "5 - Should return VPC objects when VPCs exist" {
+        It "5 - Should return DigitalOceanVPC class objects when VPCs exist" {
             $result = Get-DigitalOceanVPC
             $result | Should -Not -BeNullOrEmpty
             $result.Count | Should -Be 2
-            $result[0].id | Should -Be "f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
-            $result[0].name | Should -Be "test-vpc-1"
-            $result[1].name | Should -Be "production-vpc"
+            $result[0].GetType().Name | Should -Be 'DigitalOceanVPC'
+            $result[0].Id | Should -Be "f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
+            $result[0].Name | Should -Be "test-vpc-1"
+            $result[1].Name | Should -Be "production-vpc"
         }
 
         It "6 - Should call Invoke-DigitalOceanAPI with correct parameters" {
@@ -100,11 +101,11 @@ Describe "$DescribeName Unit Tests" -Tag 'Unit' {
             }
         }
 
-        It "7 - Should output each VPC individually" {
+        It "7 - Should output each VPC as DigitalOceanVPC class objects" {
             $result = Get-DigitalOceanVPC
             $result | Should -HaveCount 2
-            $result[0] | Should -BeOfType [PSCustomObject]
-            $result[1] | Should -BeOfType [PSCustomObject]
+            $result[0].GetType().Name | Should -Be 'DigitalOceanVPC'
+            $result[1].GetType().Name | Should -Be 'DigitalOceanVPC'
         }
     }
 
@@ -119,7 +120,7 @@ Describe "$DescribeName Unit Tests" -Tag 'Unit' {
             Assert-MockCalled -CommandName Invoke-DigitalOceanAPI -Times 1 -ModuleName $script:dscModuleName
         }
 
-        It "9 - Should show warning when no VPCs found" {
+        It "9 - Should show warning and return empty array when no VPCs found" {
             Mock -CommandName Invoke-DigitalOceanAPI -MockWith {
                 return @{
                     vpcs = $null
@@ -211,10 +212,10 @@ Describe "$DescribeName Unit Tests" -Tag 'Unit' {
                 }
             } -ModuleName $script:dscModuleName
 
-            $selectedResult = Get-DigitalOceanVPC | Select-Object name, ip_range
+            $selectedResult = Get-DigitalOceanVPC | Select-Object Name, IpRange
             $selectedResult | Should -Not -BeNullOrEmpty
-            $selectedResult.name | Should -Be "test-vpc"
-            $selectedResult.ip_range | Should -Be "10.116.0.0/20"
+            $selectedResult.Name | Should -Be "test-vpc"
+            $selectedResult.IpRange | Should -Be "10.116.0.0/20"
         }
     }
 }
