@@ -11,6 +11,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.4.0] - 2025-08-07
+
+### Added
+
+- Significantly improved code coverage from 93.04% to 98.95% through
+  comprehensive testing
+- Added 8 new targeted tests for DigitalOceanDroplet class constructor edge cases
+- Added tests to cover if-else logic branches in size, image, and networks
+  property handling
+- Added PSCustomObject input testing to achieve complete constructor coverage
+
+### Changed
+
+- Enhanced test suite with 3 additional test cases for complete code coverage
+- Improved DigitalOceanDroplet class testing with null property handling scenarios
+- Updated test methodology to use PSCustomObject inputs for triggering specific
+  code paths
+
+### Fixed
+
+- Fixed uncovered lines in DigitalOceanDroplet constructor (lines 166, 187-192,
+  210-211)
+- Resolved hashtable vs PSCustomObject input behavior in class constructors
+- Improved edge case handling for null and missing properties in object
+  construction
+
 ## [1.3.0] - 2025-08-07
 
 ### Added

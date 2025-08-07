@@ -12,7 +12,7 @@
     RootModule           = 'PSDigitalOcean.psm1'
 
     # Version number of this module.
-    ModuleVersion        = '1.3.0'
+    ModuleVersion        = '1.4.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -30,7 +30,7 @@
     Copyright            = '(c) Itamar Tziger. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description          = 'A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage (96.16% with 205 tests). Features class-based architecture, robust error handling, and complete API integration.'
+    Description          = 'A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage (98.95% with 471 tests). Features complete class-based architecture, robust error handling, and full API integration.'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion    = '5.0'
@@ -116,51 +116,55 @@
             # IconUri = 'https://github.com/itamartz/PSDigitalOceanUsingSampler/raw/main/icon.png'
 
             # ReleaseNotes of this module
-            # ReleaseNotes of this module
             ReleaseNotes = @'
-## v1.2.0 - Latest Release
+## v1.3.0 - Latest Release
 
 ### Added
-- Get-DigitalOceanImage: Retrieve DigitalOcean images with filtering and pagination support
-- Enhanced DigitalOceanImage class with comprehensive properties and methods
-- Support for image type filtering (application, distribution)
+- DigitalOceanVPC PowerShell class with comprehensive property structure
+- Enhanced Get-DigitalOceanVPC function to return strongly-typed objects
+- Complete class-based architecture across all major DigitalOcean resources
+- Comprehensive unit tests for VPC class (27 test cases)
+
+### Changed
+- Updated Get-DigitalOceanVPC function to use class-based output instead of PSObject
+- Enhanced VPC function documentation with Pascal case property examples
+- Improved test coverage and consistency across all VPC-related functionality
 
 ### Features
 - Complete PowerShell module for DigitalOcean API integration
-- Class-based architecture with Account, Team, Root, and DigitalOceanImage objects
+- Full class-based architecture with Account, Team, Image, Region, Size, SSH Key, VPC, and Droplet objects
 - Comprehensive error handling and defensive programming
-- 96.15% test coverage with 170 passing tests
+- 82.55% test coverage with 394 passing tests using Pester v5
 - Support for pagination and bulk operations
 - Professional documentation and examples
 
 ### Functions
+- Add-DigitalOceanAPIToken: Securely set your DigitalOcean API token
 - Get-DigitalOceanAccount: Retrieve account information with pagination support
 - Get-DigitalOceanImage: Retrieve DigitalOcean images with filtering and pagination support
+- Get-DigitalOceanRegion: Retrieve available DigitalOcean regions
+- Get-DigitalOceanSize: Retrieve available DigitalOcean droplet sizes
+- Get-DigitalOceanSSHKey: Retrieve SSH keys from your account
+- Get-DigitalOceanVPC: Retrieve Virtual Private Cloud information
+- New-DigitalOceanDroplet: Create new DigitalOcean droplets
 
 ### Quality
 - Enterprise-grade reliability with extensive testing
-- CI/CD pipeline with Azure DevOps integration
+- CI/CD pipeline with comprehensive build and test automation
 - PSScriptAnalyzer compliance
 - Modern build system using Sampler framework
 
-## v1.0.0 - Initial Release
+## v1.2.0 - Previous Release
 
-### Features
-- Complete PowerShell module for DigitalOcean API integration
-- Class-based architecture with Account, Team, and Root objects
-- Comprehensive error handling and defensive programming
-- 98.06% test coverage with 99 passing tests
-- Support for pagination and bulk operations
-- Professional documentation and examples
+### Added
+- DigitalOceanDroplet PowerShell class with comprehensive 21-property structure
+- New-DigitalOceanDroplet function to create DigitalOcean Droplets
+- Enhanced class-based architecture with strongly-typed object returns
 
-### Functions
-- Get-DigitalOceanAccount: Retrieve account information with pagination support
-
-### Quality
-- Enterprise-grade reliability with extensive testing
-- CI/CD pipeline with Azure DevOps integration
-- PSScriptAnalyzer compliance
-- Modern build system using Sampler framework
+### Changed
+- Refactored all functions to return strongly-typed class objects instead of PSObjects
+- Enhanced SSH key parameter handling with flexible type support
+- Improved null response handling across all functions
 '@
             # Prerelease string of this module
             Prerelease   = ''
