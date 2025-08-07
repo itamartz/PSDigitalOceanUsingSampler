@@ -88,6 +88,20 @@ InModuleScope $ProjectName {
                 $size.PriceHourly | Should -Be 0
                 $size.Available | Should -Be $false
             }
+
+            It '2 - Should handle single region string (line 84)' {
+                $singleRegionData = [PSCustomObject]@{
+                    slug    = 's-single-region'
+                    memory  = 1024
+                    vcpus   = 1
+                    regions = 'nyc1'  # Single string, not array - covers line 84
+                }
+                $size = New-Object DigitalOceanSize -ArgumentList $singleRegionData
+                $size.Regions | Should -HaveCount 1
+                $size.Regions[0] | Should -Be 'nyc1'
+                # When a single item is converted to array, it should be an array type
+                $size.Regions -is [array] | Should -Be $true
+            }
         }
 
         Context '4 - Should validate data types' {

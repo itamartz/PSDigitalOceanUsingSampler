@@ -833,4 +833,108 @@ Describe -Name $DescribeName {
             }
         }
     }
+
+    Context 'Missing Line Coverage Tests for Get-DigitalOceanImage' {
+
+        It '25 - Should throw when API returns null response with All parameter (line 79)' {
+            InModuleScope -ModuleName $script:dscModuleName {
+                # Mock API to return null specifically for -All parameter set (line 79)
+                Mock Invoke-DigitalOceanAPI { return $null }
+
+                # This should trigger the throw on line 79 in the All parameter set
+                { Get-DigitalOceanImage -All } | Should -Throw "*Invalid or null response from API*"
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -ParameterFilter {
+                    $Parameters.page -eq 1 -and $Parameters.per_page -eq 20
+                }
+            }
+        }
+
+        It '26 - Should throw when API returns response without images property with All parameter (line 79)' {
+            InModuleScope -ModuleName $script:dscModuleName {
+                # Mock API to return response without images property specifically for -All parameter set
+                Mock Invoke-DigitalOceanAPI {
+                    return [PSCustomObject]@{
+                        meta = [PSCustomObject]@{ total = 0 }
+                        # Missing images property entirely
+                    }
+                }
+
+                # This should trigger the throw on line 79 in the All parameter set
+                { Get-DigitalOceanImage -All } | Should -Throw "*Invalid or null response from API*"
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -ParameterFilter {
+                    $Parameters.page -eq 1 -and $Parameters.per_page -eq 20
+                }
+            }
+        }
+
+        It '27 - Should throw when API returns response with null images property with All parameter (line 79)' {
+            InModuleScope -ModuleName $script:dscModuleName {
+                # Mock API to return response with null images property specifically for -All parameter set
+                Mock Invoke-DigitalOceanAPI {
+                    return [PSCustomObject]@{
+                        images = $null
+                        meta = [PSCustomObject]@{ total = 0 }
+                    }
+                }
+
+                # This should trigger the throw on line 79 in the All parameter set
+                { Get-DigitalOceanImage -All } | Should -Throw "*Invalid or null response from API*"
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -ParameterFilter {
+                    $Parameters.page -eq 1 -and $Parameters.per_page -eq 20
+                }
+            }
+        }
+
+        It '28 - Should cover empty array output when AllImages count is 0 with All parameter (line 129)' {
+            InModuleScope -ModuleName $script:dscModuleName {
+                # Mock API to return valid response but with empty images array for -All parameter set
+                Mock Invoke-DigitalOceanAPI {
+                    return [PSCustomObject]@{
+                        images = @()  # Empty but valid array
+                        meta = [PSCustomObject]@{ total = 0 }
+                        links = [PSCustomObject]@{
+                            pages = [PSCustomObject]@{
+                                # No next property - single page with no results
+                            }
+                        }
+                    }
+                }
+
+                # This should trigger the empty array output on line 129
+                $result = Get-DigitalOceanImage -All
+
+                $result | Should -BeNullOrEmpty
+                $result.Count | Should -Be 0
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -ParameterFilter {
+                    $Parameters.page -eq 1 -and $Parameters.per_page -eq 20
+                }
+            }
+        }
+
+        It '29 - Should cover empty array output when AllImages count is 0 with Limit parameter (line 167)' {
+            InModuleScope -ModuleName $script:dscModuleName {
+                # Mock API to return valid response but with empty images array for Limit parameter set
+                Mock Invoke-DigitalOceanAPI {
+                    return [PSCustomObject]@{
+                        images = @()  # Empty but valid array
+                        meta = [PSCustomObject]@{ total = 0 }
+                    }
+                }
+
+                # This should trigger the empty array output on line 167
+                $result = Get-DigitalOceanImage -Page 1 -Limit 20
+
+                $result | Should -BeNullOrEmpty
+                $result.Count | Should -Be 0
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -ParameterFilter {
+                    $Parameters.page -eq 1 -and $Parameters.per_page -eq 20
+                }
+            }
+        }
+    }
 }

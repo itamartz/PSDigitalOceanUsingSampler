@@ -60,17 +60,17 @@ InModuleScope -ModuleName 'PSDigitalOcean' {
         Context "Constructor with PSCustomObject parameter" {
             BeforeAll {
                 $script:vpcData = [PSCustomObject]@{
-                    id = "5a4981aa-9653-4bd1-bef5-d6bff52042e4"
-                    name = "production-vpc"
-                    ip_range = "10.108.0.0/20"
+                    id          = "5a4981aa-9653-4bd1-bef5-d6bff52042e4"
+                    name        = "production-vpc"
+                    ip_range    = "10.108.0.0/20"
                     description = "Production environment VPC"
-                    default = $false
-                    created_at = "2024-01-01T00:00:00Z"
-                    region = [PSCustomObject]@{
-                        name = "New York 1"
-                        slug = "nyc1"
-                        sizes = @("s-1vcpu-1gb", "s-2vcpu-2gb")
-                        features = @("virtio", "private_networking")
+                    default     = $false
+                    created_at  = "2024-01-01T00:00:00Z"
+                    region      = [PSCustomObject]@{
+                        name      = "New York 1"
+                        slug      = "nyc1"
+                        sizes     = @("s-1vcpu-1gb", "s-2vcpu-2gb")
+                        features  = @("virtio", "private_networking")
                         available = $true
                     }
                 }
@@ -107,7 +107,7 @@ InModuleScope -ModuleName 'PSDigitalOcean' {
 
             It "13 - Should handle VPCObject with null id property" {
                 $nullIdVpc = [PSCustomObject]@{
-                    id = $null
+                    id   = $null
                     name = "test-vpc"
                 }
                 $vpc = [DigitalOceanVPC]::new($nullIdVpc)
@@ -117,7 +117,7 @@ InModuleScope -ModuleName 'PSDigitalOcean' {
 
             It "14 - Should handle VPCObject with null name property" {
                 $nullNameVpc = [PSCustomObject]@{
-                    id = "test-id"
+                    id   = "test-id"
                     name = $null
                 }
                 $vpc = [DigitalOceanVPC]::new($nullNameVpc)
@@ -127,8 +127,8 @@ InModuleScope -ModuleName 'PSDigitalOcean' {
 
             It "15 - Should handle VPCObject with invalid created_at property" {
                 $invalidDateVpc = [PSCustomObject]@{
-                    id = "test-id"
-                    name = "test-vpc"
+                    id         = "test-id"
+                    name       = "test-vpc"
                     created_at = "invalid-date"
                 }
                 $vpc = [DigitalOceanVPC]::new($invalidDateVpc)
@@ -137,43 +137,75 @@ InModuleScope -ModuleName 'PSDigitalOcean' {
 
             It "16 - Should handle VPCObject with null region property" {
                 $nullRegionVpc = [PSCustomObject]@{
-                    id = "test-id"
-                    name = "test-vpc"
+                    id     = "test-id"
+                    name   = "test-vpc"
                     region = $null
                 }
                 $vpc = [DigitalOceanVPC]::new($nullRegionVpc)
                 $vpc.Region | Should -BeOfType [hashtable]
                 $vpc.Region.Count | Should -Be 0
             }
+
+            It "17 - Should handle VPCObject with region having null name property" {
+                $regionWithNullNameVpc = [PSCustomObject]@{
+                    id     = "test-id"
+                    name   = "test-vpc"
+                    region = [PSCustomObject]@{
+                        name      = $null
+                        slug      = "nyc1"
+                        available = $true
+                    }
+                }
+                $vpc = [DigitalOceanVPC]::new($regionWithNullNameVpc)
+                $vpc.Region.name | Should -Be ''  # This covers line 51
+                $vpc.Region.slug | Should -Be "nyc1"
+                $vpc.Region.available | Should -Be $true
+            }
+
+            It "18 - Should handle VPCObject with region having null slug property (line 51)" {
+                $regionWithNullSlugVpc = [PSCustomObject]@{
+                    id     = "test-id-slug"
+                    name   = "test-vpc-slug"
+                    region = [PSCustomObject]@{
+                        name      = "New York"
+                        slug      = $null  # This should trigger the '' fallback on line 51
+                        available = $true
+                    }
+                }
+                $vpc = [DigitalOceanVPC]::new($regionWithNullSlugVpc)
+                $vpc.Region.name | Should -Be "New York"
+                $vpc.Region.slug | Should -Be ''  # This covers the missed line 51
+                $vpc.Region.available | Should -Be $true
+            }
         }
 
         Context "Methods" {
-            It "17 - Should have ToString method" {
+            It "19 - Should have ToString method" {
                 $vpc = [DigitalOceanVPC]::new()
                 $vpc.ToString() | Should -BeOfType [string]
             }
 
-            It "18 - Should have ToHashtable method" {
+            It "20 - Should have ToHashtable method" {
                 $vpc = [DigitalOceanVPC]::new()
                 $hashtable = $vpc.ToHashtable()
                 $hashtable | Should -BeOfType [hashtable]
             }
 
-            It "19 - Should return correct string representation" {
+            It "21 - Should return correct string representation" {
                 $vpcData = [PSCustomObject]@{
-                    name = "production-vpc"
+                    name     = "production-vpc"
                     ip_range = "10.108.0.0/20"
                 }
                 $vpc = [DigitalOceanVPC]::new($vpcData)
                 $vpc.ToString() | Should -Be "production-vpc (10.108.0.0/20)"
             }
 
-            It "20 - Should return correct hashtable representation" {
+            It "22 - Should return correct hashtable representation" {
                 $vpcData = [PSCustomObject]@{
-                    id = "test-id"
-                    name = "test-vpc"
+                    id       = "test-id"
+                    name     = "test-vpc"
                     ip_range = "10.0.0.0/16"
-                    default = $true
+                    default  = $true
                 }
                 $vpc = [DigitalOceanVPC]::new($vpcData)
                 $hashtable = $vpc.ToHashtable()
@@ -186,37 +218,37 @@ InModuleScope -ModuleName 'PSDigitalOcean' {
         }
 
         Context "Properties validation" {
-            It "21 - Should have Id property of type string" {
+            It "23 - Should have Id property of type string" {
                 $vpc = [DigitalOceanVPC]::new()
                 $vpc.Id | Should -BeOfType [string]
             }
 
-            It "22 - Should have Name property of type string" {
+            It "24 - Should have Name property of type string" {
                 $vpc = [DigitalOceanVPC]::new()
                 $vpc.Name | Should -BeOfType [string]
             }
 
-            It "23 - Should have IpRange property of type string" {
+            It "25 - Should have IpRange property of type string" {
                 $vpc = [DigitalOceanVPC]::new()
                 $vpc.IpRange | Should -BeOfType [string]
             }
 
-            It "24 - Should have Region property of type hashtable" {
+            It "26 - Should have Region property of type hashtable" {
                 $vpc = [DigitalOceanVPC]::new()
                 $vpc.Region | Should -BeOfType [hashtable]
             }
 
-            It "25 - Should have Description property of type string" {
+            It "27 - Should have Description property of type string" {
                 $vpc = [DigitalOceanVPC]::new()
                 $vpc.Description | Should -BeOfType [string]
             }
 
-            It "26 - Should have Default property of type bool" {
+            It "28 - Should have Default property of type bool" {
                 $vpc = [DigitalOceanVPC]::new()
                 $vpc.Default | Should -BeOfType [bool]
             }
 
-            It "27 - Should have CreatedAt property of type datetime" {
+            It "29 - Should have CreatedAt property of type datetime" {
                 $vpc = [DigitalOceanVPC]::new()
                 $vpc.CreatedAt | Should -BeOfType [datetime]
             }

@@ -100,15 +100,15 @@ Describe -Name $DescribeName {
                 $script:mockResponse = @{
                     account = @(
                         @{
-                            uuid   = "test-uuid-1"
-                            name   = "Test Account"
-                            email  = "test@example.com"
-                            status = "active"
-                            droplet_limit = 25
+                            uuid              = "test-uuid-1"
+                            name              = "Test Account"
+                            email             = "test@example.com"
+                            status            = "active"
+                            droplet_limit     = 25
                             floating_ip_limit = 5
-                            email_verified = $true
-                            status_message = "Account is active"
-                            team = @{
+                            email_verified    = $true
+                            status_message    = "Account is active"
+                            team              = @{
                                 uuid = "team-uuid-1"
                                 name = "Test Team"
                             }
@@ -427,15 +427,22 @@ Describe -Name $DescribeName {
                 # Create a large array of accounts with all required properties
                 $largeAccountArray = 1..100 | ForEach-Object {
                     @{
-                        uuid = "uuid-$_";
-                        name = "Account $_";
-                        email = "test$_@example.com";
-                        droplet_limit = (20 + $_);
-                        floating_ip_limit = (5 + ($_  % 10));
-                        email_verified = ($_ % 2 -eq 0);
-                        status = if ($_ % 2 -eq 0) { "active" } else { "pending" };
-                        status_message = "Account $_ status";
-                        team = @{ uuid = "team-$_"; name = "Team $_" }
+                        uuid              = "uuid-$_";
+                        name              = "Account $_";
+                        email             = "test$_@example.com";
+                        droplet_limit     = (20 + $_);
+                        floating_ip_limit = (5 + ($_ % 10));
+                        email_verified    = ($_ % 2 -eq 0);
+                        status            = if ($_ % 2 -eq 0)
+                        {
+                            "active" 
+                        }
+                        else
+                        {
+                            "pending" 
+                        };
+                        status_message    = "Account $_ status";
+                        team              = @{ uuid = "team-$_"; name = "Team $_" }
                     }
                 }
 
@@ -868,21 +875,21 @@ Describe -Name $DescribeName {
                 $apiResponse = @{
                     account = @(
                         @{
-                            droplet_limit = 25
+                            droplet_limit     = 25
                             floating_ip_limit = 5
-                            email = "user@example.com"
-                            name = "Test User"
-                            uuid = "account-uuid-123"
-                            email_verified = $true
-                            status = "active"
-                            status_message = "Account is active"
-                            team = @{
+                            email             = "user@example.com"
+                            name              = "Test User"
+                            uuid              = "account-uuid-123"
+                            email_verified    = $true
+                            status            = "active"
+                            status_message    = "Account is active"
+                            team              = @{
                                 uuid = "team-uuid-456"
                                 name = "Development Team"
                             }
                         }
                     )
-                    meta = @{ total = 1 }
+                    meta    = @{ total = 1 }
                 }
 
                 Mock Invoke-DigitalOceanAPI { return $apiResponse }
@@ -918,18 +925,18 @@ Describe -Name $DescribeName {
                 $apiResponse = @{
                     account = @(
                         @{
-                            droplet_limit = 10
+                            droplet_limit     = 10
                             floating_ip_limit = 2
-                            email = "solo@example.com"
-                            name = "Solo User"
-                            uuid = "solo-uuid-789"
-                            email_verified = $false
-                            status = "pending"
-                            status_message = "Verification pending"
-                            team = $null
+                            email             = "solo@example.com"
+                            name              = "Solo User"
+                            uuid              = "solo-uuid-789"
+                            email_verified    = $false
+                            status            = "pending"
+                            status_message    = "Verification pending"
+                            team              = $null
                         }
                     )
-                    meta = @{ total = 1 }
+                    meta    = @{ total = 1 }
                 }
 
                 Mock Invoke-DigitalOceanAPI { return $apiResponse }
@@ -962,35 +969,35 @@ Describe -Name $DescribeName {
                 $apiResponse = @{
                     account = @(
                         @{
-                            droplet_limit = 50
+                            droplet_limit     = 50
                             floating_ip_limit = 10
-                            email = "admin@company.com"
-                            name = "Admin User"
-                            uuid = "admin-uuid-001"
-                            email_verified = $true
-                            status = "active"
-                            status_message = "Admin account"
-                            team = @{
+                            email             = "admin@company.com"
+                            name              = "Admin User"
+                            uuid              = "admin-uuid-001"
+                            email_verified    = $true
+                            status            = "active"
+                            status_message    = "Admin account"
+                            team              = @{
                                 uuid = "admin-team-001"
                                 name = "Admin Team"
                             }
                         },
                         @{
-                            droplet_limit = 20
+                            droplet_limit     = 20
                             floating_ip_limit = 3
-                            email = "dev@company.com"
-                            name = "Developer"
-                            uuid = "dev-uuid-002"
-                            email_verified = $true
-                            status = "active"
-                            status_message = "Developer account"
-                            team = @{
+                            email             = "dev@company.com"
+                            name              = "Developer"
+                            uuid              = "dev-uuid-002"
+                            email_verified    = $true
+                            status            = "active"
+                            status_message    = "Developer account"
+                            team              = @{
                                 uuid = "dev-team-002"
                                 name = "Dev Team"
                             }
                         }
                     )
-                    meta = @{ total = 2 }
+                    meta    = @{ total = 2 }
                 }
 
                 Mock Invoke-DigitalOceanAPI { return $apiResponse }
@@ -1021,7 +1028,8 @@ Describe -Name $DescribeName {
                     param($APIPath, $Parameters)
                     $script:callCount39++
 
-                    if ($script:callCount39 -eq 1) {
+                    if ($script:callCount39 -eq 1)
+                    {
                         # First page
                         $nextPages = New-Object PSObject
                         $nextPages | Add-Member -MemberType NoteProperty -Name 'next' -Value 'https://api.digitalocean.com/v2/account?page=2&per_page=1'
@@ -1032,25 +1040,26 @@ Describe -Name $DescribeName {
                         return @{
                             account = @(
                                 @{
-                                    droplet_limit = 30
+                                    droplet_limit     = 30
                                     floating_ip_limit = 6
-                                    email = "page1@example.com"
-                                    name = "Page 1 User"
-                                    uuid = "page1-uuid"
-                                    email_verified = $true
-                                    status = "active"
-                                    status_message = "First page account"
-                                    team = @{
+                                    email             = "page1@example.com"
+                                    name              = "Page 1 User"
+                                    uuid              = "page1-uuid"
+                                    email_verified    = $true
+                                    status            = "active"
+                                    status_message    = "First page account"
+                                    team              = @{
                                         uuid = "page1-team-uuid"
                                         name = "Page 1 Team"
                                     }
                                 }
                             )
-                            meta = @{ total = 2 }
-                            links = $links
+                            meta    = @{ total = 2 }
+                            links   = $links
                         }
                     }
-                    else {
+                    else
+                    {
                         # Second page (final)
                         $emptyPages = New-Object PSObject
                         $links = New-Object PSObject
@@ -1059,22 +1068,22 @@ Describe -Name $DescribeName {
                         return @{
                             account = @(
                                 @{
-                                    droplet_limit = 40
+                                    droplet_limit     = 40
                                     floating_ip_limit = 8
-                                    email = "page2@example.com"
-                                    name = "Page 2 User"
-                                    uuid = "page2-uuid"
-                                    email_verified = $false
-                                    status = "pending"
-                                    status_message = "Second page account"
-                                    team = @{
+                                    email             = "page2@example.com"
+                                    name              = "Page 2 User"
+                                    uuid              = "page2-uuid"
+                                    email_verified    = $false
+                                    status            = "pending"
+                                    status_message    = "Second page account"
+                                    team              = @{
                                         uuid = "page2-team-uuid"
                                         name = "Page 2 Team"
                                     }
                                 }
                             )
-                            meta = @{ total = 2 }
-                            links = $links
+                            meta    = @{ total = 2 }
+                            links   = $links
                         }
                     }
                 }
@@ -1108,18 +1117,18 @@ Describe -Name $DescribeName {
                 $apiResponse = @{
                     account = @(
                         @{
-                            droplet_limit = 15
+                            droplet_limit     = 15
                             floating_ip_limit = 3
-                            email = "noteam@example.com"
-                            name = "No Team User"
-                            uuid = "noteam-uuid"
-                            email_verified = $true
-                            status = "active"
-                            status_message = "No team assigned"
+                            email             = "noteam@example.com"
+                            name              = "No Team User"
+                            uuid              = "noteam-uuid"
+                            email_verified    = $true
+                            status            = "active"
+                            status_message    = "No team assigned"
                             # team property is missing entirely
                         }
                     )
-                    meta = @{ total = 1 }
+                    meta    = @{ total = 1 }
                 }
 
                 Mock Invoke-DigitalOceanAPI { return $apiResponse }
@@ -1141,18 +1150,18 @@ Describe -Name $DescribeName {
                 $apiResponse = @{
                     account = @(
                         @{
-                            droplet_limit = 12
+                            droplet_limit     = 12
                             floating_ip_limit = 2
-                            email = "emptyteam@example.com"
-                            name = "Empty Team User"
-                            uuid = "emptyteam-uuid"
-                            email_verified = $false
-                            status = "pending"
-                            status_message = "Empty team"
-                            team = @{}  # Empty team object
+                            email             = "emptyteam@example.com"
+                            name              = "Empty Team User"
+                            uuid              = "emptyteam-uuid"
+                            email_verified    = $false
+                            status            = "pending"
+                            status_message    = "Empty team"
+                            team              = @{}  # Empty team object
                         }
                     )
-                    meta = @{ total = 1 }
+                    meta    = @{ total = 1 }
                 }
 
                 Mock Invoke-DigitalOceanAPI { return $apiResponse }
@@ -1167,6 +1176,102 @@ Describe -Name $DescribeName {
                 $result[0].team | Should -Not -BeNullOrEmpty
                 $result[0].team.GetType().Name | Should -Be 'Team'
                 # Team properties should be empty/null from empty object
+            }
+        }
+    }
+
+    Context 'Missing Line Coverage Tests' {
+
+        It '42 - Should cover team uuid and name null handling (lines 115, 116)' {
+            InModuleScope -ModuleName $script:dscModuleName {
+                # Create PSCustomObject with team object where uuid and name are explicitly null
+                # We need to ensure the team object exists but its uuid/name properties are null
+                $accountData = [PSCustomObject]@{
+                    droplet_limit     = 25
+                    floating_ip_limit = 5
+                    email             = "team-null@example.com"
+                    name              = "Team Null User"
+                    uuid              = "user-uuid-null-team"
+                    email_verified    = $true
+                    status            = "active"
+                    status_message    = "Active user"
+                    team              = [PSCustomObject]@{
+                        # Explicitly set these to null to trigger the else clauses
+                        uuid       = $null
+                        name       = $null
+                        # Add some other property to make the team object exist
+                        created_at = "2024-01-01T00:00:00Z"
+                    }
+                }
+
+                # Mock API response
+                $apiResponse = @{
+                    account = @($accountData)
+                    meta    = @{ total = 1 }
+                }
+
+                Mock Invoke-DigitalOceanAPI { return $apiResponse }
+
+                $result = Get-DigitalOceanAccount
+
+                # Verify result and team handling
+                $result | Should -Not -BeNullOrEmpty
+                $result.Count | Should -Be 1
+                $result[0].GetType().Name | Should -Be 'Account'
+                $result[0].team | Should -Not -BeNullOrEmpty
+                $result[0].team.GetType().Name | Should -Be 'Team'
+
+                # These lines specifically test the empty string defaults for null team properties
+                # Line 115: $(if ($null -ne $obj.team.uuid) { $obj.team.uuid } else { "" })
+                # Line 116: $(if ($null -ne $obj.team.name) { $obj.team.name } else { "" })
+                $result[0].team.uuid | Should -Be ""
+                $result[0].team.name | Should -Be ""
+            }
+        }
+
+        It '43 - Should cover status_message null handling (line 125)' {
+            InModuleScope -ModuleName $script:dscModuleName {
+                # Create PSCustomObject where status_message is explicitly null
+                $accountData = [PSCustomObject]@{
+                    droplet_limit     = 30
+                    floating_ip_limit = 6
+                    email             = "status-null@example.com"
+                    name              = "Status Null User"
+                    uuid              = "user-uuid-status-null"
+                    email_verified    = $true
+                    status            = "active"
+                    # Don't set status_message property at all, or set it to null
+                    team              = [PSCustomObject]@{
+                        uuid = "team-uuid-status-test"
+                        name = "Status Test Team"
+                    }
+                }
+
+                # Add status_message as null explicitly
+                $accountData | Add-Member -MemberType NoteProperty -Name 'status_message' -Value $null -Force
+
+                $apiResponse = @{
+                    account = @($accountData)
+                    meta    = @{ total = 1 }
+                }
+
+                Mock Invoke-DigitalOceanAPI { return $apiResponse }
+
+                $result = Get-DigitalOceanAccount
+
+                # Verify result and status_message handling
+                $result | Should -Not -BeNullOrEmpty
+                $result.Count | Should -Be 1
+                $result[0].GetType().Name | Should -Be 'Account'
+
+                # This line specifically tests the empty string default for null status_message
+                # Line 125: $(if ($null -ne $obj.status_message) { $obj.status_message } else { "" })
+                $result[0].status_message | Should -Be ""
+
+                # Verify other properties are set correctly
+                $result[0].email | Should -Be "status-null@example.com"
+                $result[0].status | Should -Be "active"
+                $result[0].team.uuid | Should -Be "team-uuid-status-test"
             }
         }
     }

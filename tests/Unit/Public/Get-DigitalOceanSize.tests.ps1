@@ -331,5 +331,61 @@ Describe $DescribeName {
                 $result[0].Memory | Should -Be 0  # Should handle null gracefully
             }
         }
+
+        It "15 - Should throw when API returns null response (line 67)" {
+            InModuleScope $script:dscModuleName {
+                # Mock Invoke-DigitalOceanAPI to return null, triggering line 67
+                Mock Invoke-DigitalOceanAPI {
+                    return $null
+                }
+
+                # This should trigger the specific line 67: throw "Invalid or null response from API"
+                { Get-DigitalOceanSize } | Should -Throw -ExpectedMessage "*Invalid or null response from API*"
+
+                # Verify the mock was called
+                Assert-MockCalled -CommandName Invoke-DigitalOceanAPI -Exactly 1
+            }
+        }
+
+        It "16 - Should throw when API returns null response with All parameter (line 67)" {
+            InModuleScope $script:dscModuleName {
+                # Mock Invoke-DigitalOceanAPI to return null specifically for -All parameter set
+                Mock Invoke-DigitalOceanAPI {
+                    return $null
+                }
+
+                # This should trigger the specific line 67 in the All parameter set: throw "Invalid or null response from API"
+                { Get-DigitalOceanSize -All } | Should -Throw -ExpectedMessage "*Invalid or null response from API*"
+
+                # Verify the mock was called with All parameter set parameters
+                Assert-MockCalled -CommandName Invoke-DigitalOceanAPI -Exactly 1 -ParameterFilter {
+                    $APIPath -eq 'sizes' -and
+                    $Parameters.page -eq 1 -and
+                    $Parameters.per_page -eq 20
+                }
+            }
+        }
+
+        It "17 - Should throw when API returns response with null sizes property with All parameter (line 67)" {
+            InModuleScope $script:dscModuleName {
+                # Mock API to return response with null sizes property specifically for -All parameter set
+                Mock Invoke-DigitalOceanAPI {
+                    return [PSCustomObject]@{
+                        sizes = $null
+                        meta = [PSCustomObject]@{ total = 0 }
+                    }
+                }
+
+                # This should trigger the specific line 67 in the All parameter set: throw "Invalid or null response from API"
+                { Get-DigitalOceanSize -All } | Should -Throw -ExpectedMessage "*Invalid or null response from API*"
+
+                # Verify the mock was called with All parameter set parameters
+                Assert-MockCalled -CommandName Invoke-DigitalOceanAPI -Exactly 1 -ParameterFilter {
+                    $APIPath -eq 'sizes' -and
+                    $Parameters.page -eq 1 -and
+                    $Parameters.per_page -eq 20
+                }
+            }
+        }
     }
 }
