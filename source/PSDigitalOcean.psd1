@@ -117,24 +117,33 @@
 
             # ReleaseNotes of this module
             ReleaseNotes = @'
-## v1.3.0 - Latest Release
+## v1.4.0 - Latest Release
 
 ### Added
-- DigitalOceanVPC PowerShell class with comprehensive property structure
-- Enhanced Get-DigitalOceanVPC function to return strongly-typed objects
-- Complete class-based architecture across all major DigitalOcean resources
-- Comprehensive unit tests for VPC class (27 test cases)
+- Comprehensive edge case testing for all PowerShell classes
+- Complete constructor coverage for complex object initialization logic
+- 77 new test cases covering previously uncovered code paths
+- Enhanced error handling and null value scenarios
+- Debug utilities for development workflow
 
 ### Changed
-- Updated Get-DigitalOceanVPC function to use class-based output instead of PSObject
-- Enhanced VPC function documentation with Pascal case property examples
-- Improved test coverage and consistency across all VPC-related functionality
+- Improved code coverage from 82.55% to 98.95% (+16.4% improvement)
+- Expanded test suite from 394 to 471 comprehensive tests
+- Enhanced GitVersion integration for proper semantic versioning
+- Updated build system to use GitVersion calculation instead of hardcoded version
+- Improved documentation with latest coverage statistics
+
+### Quality Improvements
+- Enterprise-grade reliability with 98.95% test coverage
+- Complete class-based architecture validation
+- PowerShell 5.1 compatibility testing with sophisticated object handling
+- CI/CD pipeline with comprehensive build and test automation
+- PSScriptAnalyzer compliance maintained
 
 ### Features
 - Complete PowerShell module for DigitalOcean API integration
 - Full class-based architecture with Account, Team, Image, Region, Size, SSH Key, VPC, and Droplet objects
 - Comprehensive error handling and defensive programming
-- 82.55% test coverage with 394 passing tests using Pester v5
 - Support for pagination and bulk operations
 - Professional documentation and examples
 
@@ -148,13 +157,20 @@
 - Get-DigitalOceanVPC: Retrieve Virtual Private Cloud information
 - New-DigitalOceanDroplet: Create new DigitalOcean droplets
 
-### Quality
-- Enterprise-grade reliability with extensive testing
-- CI/CD pipeline with comprehensive build and test automation
-- PSScriptAnalyzer compliance
-- Modern build system using Sampler framework
+## v1.3.0 - Previous Release
 
-## v1.2.0 - Previous Release
+### Added
+- DigitalOceanVPC PowerShell class with comprehensive property structure
+- Enhanced Get-DigitalOceanVPC function to return strongly-typed objects
+- Complete class-based architecture across all major DigitalOcean resources
+- Comprehensive unit tests for VPC class (27 test cases)
+
+### Changed
+- Updated Get-DigitalOceanVPC function to use class-based output instead of PSObject
+- Enhanced VPC function documentation with Pascal case property examples
+- Improved test coverage and consistency across all VPC-related functionality
+
+## v1.2.0 - Earlier Release
 
 ### Added
 - DigitalOceanDroplet PowerShell class with comprehensive 21-property structure
