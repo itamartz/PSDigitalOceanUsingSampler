@@ -12,7 +12,7 @@
     RootModule           = 'PSDigitalOcean.psm1'
 
     # Version number of this module.
-    ModuleVersion        = '1.1.0'
+    ModuleVersion        = '1.2.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -118,7 +118,7 @@
             # ReleaseNotes of this module
             # ReleaseNotes of this module
             ReleaseNotes = @'
-## v1.1.0 - Latest Release
+## v1.2.0 - Latest Release
 
 ### Added
 - Get-DigitalOceanImage: Retrieve DigitalOcean images with filtering and pagination support

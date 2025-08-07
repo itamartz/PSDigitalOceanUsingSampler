@@ -4,13 +4,13 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-95.99%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-96.25%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **95.99% Test Coverage** with 306 comprehensive passing tests  
+✅ **96.25% Test Coverage** with 367 comprehensive passing tests  
    using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
    Account, Team, Image, Region, Size, and Root objects  

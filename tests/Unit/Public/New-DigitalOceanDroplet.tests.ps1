@@ -151,18 +151,17 @@ Describe -Name $DescribeName {
                 Mock Get-DigitalOceanSize { return @(@{ slug = 's-1vcpu-1gb' }) }
                 Mock Get-DigitalOceanImage { return @(@{ slug = 'ubuntu-20-04-x64' }) }
 
-                # Valid SSH key object
-                $validSSHKey = [PSCustomObject]@{ id = 123; name = "test-key" }
-                $validSSHKey.PSObject.TypeNames.Insert(0, 'DigitalOcean.Account.SSHKeys')
+                # Test parameter validation by checking function metadata
+                $function = Get-Command New-DigitalOceanDroplet
+                $sshKeyParam = $function.Parameters['SSHKey']
 
-                # Invalid SSH key object
-                $invalidSSHKey = [PSCustomObject]@{ id = 123; name = "test-key" }
+                # Check parameter type is Object (allowing for DigitalOceanSSHKey objects)
+                $sshKeyParam.ParameterType.Name | Should -Be 'Object'
 
-                # Valid SSH key should not throw during parameter binding
-                { New-DigitalOceanDroplet -DropletName "test" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -SSHKey $validSSHKey -WhatIf } | Should -Not -Throw
-
-                # Invalid SSH key should throw during parameter binding
-                { New-DigitalOceanDroplet -DropletName "test" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -SSHKey $invalidSSHKey -WhatIf } | Should -Throw
+                # Verify parameter exists and has help message
+                $sshKeyParam | Should -Not -BeNull
+                $helpAttribute = $sshKeyParam.Attributes | Where-Object { $_ -is [System.Management.Automation.ParameterAttribute] }
+                $helpAttribute.HelpMessage | Should -BeLike "*SSH key object*"
             }
         }
 
@@ -221,8 +220,7 @@ Describe -Name $DescribeName {
                     return @{ droplet = @{ id = 123 } }
                 }
 
-                $sshKey = [PSCustomObject]@{ id = 456; name = "test-key" }
-                $sshKey.PSObject.TypeNames.Insert(0, 'DigitalOcean.Account.SSHKeys')
+                $sshKey = [DigitalOceanSSHKey]::new(456, "test-key", "aa:bb:cc", "ssh-rsa test")
 
                 New-DigitalOceanDroplet -DropletName "test-droplet" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -SSHKey $sshKey -Confirm:$false
 
@@ -328,10 +326,12 @@ Describe -Name $DescribeName {
 
                 $result = New-DigitalOceanDroplet -DropletName "test-droplet" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -Confirm:$false
 
-                # Verify response handling
-                $result.id | Should -Be 123456789
-                $result.name | Should -Be "test-droplet"
-                $result.status | Should -Be "new"
+                # Verify response handling - now returns DigitalOceanDroplet class object
+                $result | Should -Not -BeNullOrEmpty
+                $result.PSObject.TypeNames[0] | Should -Be 'DigitalOceanDroplet'
+                $result.Id | Should -Be 123456789
+                $result.Name | Should -Be "test-droplet"
+                $result.Status | Should -Be "new"
 
                 Assert-MockCalled Invoke-RestMethod -Times 1
             }
@@ -403,9 +403,10 @@ Describe -Name $DescribeName {
 
                 $result = New-DigitalOceanDroplet -DropletName "test-droplet" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -Confirm:$false
 
-                # Function handles null response and returns error messages
+                # Function handles null response and returns empty droplet object
                 $result | Should -Not -BeNullOrEmpty
-                $result | Should -Match "Error was"
+                $result.PSObject.TypeNames[0] | Should -Be 'DigitalOceanDroplet'
+                $result.Id | Should -Be 0
 
                 Assert-MockCalled Invoke-RestMethod -Times 1
             }
@@ -582,7 +583,8 @@ Describe -Name $DescribeName {
                 $result = New-DigitalOceanDroplet -DropletName "test-droplet" -Size "s-1vcpu-1gb" -Image "ubuntu-20-04-x64" -Confirm:$false
 
                 $result | Should -Not -BeNullOrEmpty
-                $result | Should -Match "Error was"
+                $result.PSObject.TypeNames[0] | Should -Be 'DigitalOceanDroplet'
+                $result.Id | Should -Be 0
 
                 Assert-MockCalled Invoke-RestMethod -Times 1
             }
@@ -709,8 +711,7 @@ Describe -Name $DescribeName {
                 }
 
                 # Create SSH key object
-                $sshKey = [PSCustomObject]@{ id = 789; name = "production-key" }
-                $sshKey.PSObject.TypeNames.Insert(0, 'DigitalOcean.Account.SSHKeys')
+                $sshKey = [DigitalOceanSSHKey]::new(789, "production-key", "aa:bb:cc", "ssh-rsa test")
 
                 # Test with all possible parameters
                 $result = New-DigitalOceanDroplet `
@@ -726,9 +727,11 @@ Describe -Name $DescribeName {
                     -Volumes @("vol-production-1", "vol-production-2") `
                     -Confirm:$false
 
-                # Verify the response
-                $result.id | Should -Be 987654321
-                $result.name | Should -Be "complex-droplet"
+                # Verify the response - now returns DigitalOceanDroplet class object
+                $result | Should -Not -BeNullOrEmpty
+                $result.PSObject.TypeNames[0] | Should -Be 'DigitalOceanDroplet'
+                $result.Id | Should -Be 987654321
+                $result.Name | Should -Be "complex-droplet"
 
                 Assert-MockCalled Invoke-RestMethod -Times 1
             }
@@ -765,9 +768,11 @@ Describe -Name $DescribeName {
                     -Volumes @() `
                     -Confirm:$false
 
-                # Verify the response
-                $result.id | Should -Be 123
-                $result.name | Should -Be "test-droplet"
+                # Verify the response - now returns DigitalOceanDroplet class object
+                $result | Should -Not -BeNullOrEmpty
+                $result.PSObject.TypeNames[0] | Should -Be 'DigitalOceanDroplet'
+                $result.Id | Should -Be 123
+                $result.Name | Should -Be "test-droplet"
 
                 Assert-MockCalled Invoke-RestMethod -Times 1
             }

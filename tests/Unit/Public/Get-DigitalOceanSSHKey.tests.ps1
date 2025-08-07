@@ -36,8 +36,8 @@ Describe $DescribeName {
 
         It "2 - Should have correct output type attribute" {
             $commandInfo = Get-Command Get-DigitalOceanSSHKey
-            $outputType = $commandInfo.OutputType.Name
-            $outputType | Should -Be 'DigitalOcean.Account.SSHKeys'
+            $outputType = $commandInfo.OutputType.Type
+            $outputType.Name | Should -Be 'DigitalOceanSSHKey'
         }
 
         It "3 - Should accept SSHKeyName parameter as optional" {
@@ -85,26 +85,35 @@ Describe $DescribeName {
 
             $result | Should -Not -BeNullOrEmpty
             $result.Count | Should -Be 2
-            $result[0].name | Should -Be "test-key-1"
-            $result[1].name | Should -Be "production-key"
+            $result[0].Name | Should -Be "test-key-1"
+            $result[1].Name | Should -Be "production-key"
         }
 
         It "6 - Should filter SSH keys by name when SSHKeyName is specified" {
             $result = Get-DigitalOceanSSHKey -SSHKeyName "test-key-1"
 
             $result | Should -Not -BeNullOrEmpty
-            $result.name | Should -Be "test-key-1"
-            $result.id | Should -Be 12345
+            $result.Name | Should -Be "test-key-1"
+            $result.Id | Should -Be 12345
         }
 
-        It "7 - Should apply correct type name to returned objects" {
+        It "7 - Should return DigitalOceanSSHKey class objects" {
             $result = Get-DigitalOceanSSHKey
 
-            $result[0].PSObject.TypeNames[0] | Should -Be 'DigitalOcean.Account.SSHKeys'
-            $result[1].PSObject.TypeNames[0] | Should -Be 'DigitalOcean.Account.SSHKeys'
+            $result[0].GetType().Name | Should -Be 'DigitalOceanSSHKey'
+            $result[1].GetType().Name | Should -Be 'DigitalOceanSSHKey'
         }
 
-        It "8 - Should write verbose messages when -Verbose is used" {
+        It "8 - Should return objects with correct class properties" {
+            $result = Get-DigitalOceanSSHKey
+
+            $result[0].Id | Should -Be 12345
+            $result[0].Name | Should -Be "test-key-1"
+            $result[0].Fingerprint | Should -Be "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99"
+            $result[0].PublicKey | Should -Be "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC... test-key-1"
+        }
+
+        It "9 - Should write verbose messages when -Verbose is used" {
             $verboseOutput = @()
             Get-DigitalOceanSSHKey -Verbose 4>&1 | ForEach-Object {
                 if ($_.GetType().Name -eq 'VerboseRecord')
@@ -118,7 +127,7 @@ Describe $DescribeName {
             $verboseOutput -join ' ' | Should -Match "Found 2 SSH key"
         }
 
-        It "9 - Should write warning when SSH key name is not found" {
+        It "10 - Should write warning when SSH key name is not found" {
             $warningOutput = @()
             Get-DigitalOceanSSHKey -SSHKeyName "non-existent-key" -WarningVariable warningOutput -WarningAction SilentlyContinue
 
@@ -138,7 +147,7 @@ Describe $DescribeName {
             } -ModuleName PSDigitalOcean
         }
 
-        It "10 - Should handle empty SSH keys response gracefully" {
+        It "11 - Should handle empty SSH keys response gracefully" {
             $warningOutput = @()
             $result = Get-DigitalOceanSSHKey -WarningVariable warningOutput -WarningAction SilentlyContinue
 

@@ -11,7 +11,7 @@ function New-DigitalOceanDroplet
     The human-readable string you wish to use when displaying the Droplet name. The name, if set to a domain name managed in the DigitalOcean DNS management system, will configure a PTR record for the Droplet.
 
     .PARAMETER SSHKey
-    SSH key object to be added to the Droplet for authentication. Must be a DigitalOcean.Account.SSHKeys object.
+    SSH key object to be added to the Droplet for authentication. Must be a DigitalOceanSSHKey object.
 
     .PARAMETER Backups
     A boolean indicating whether automated backups should be enabled for the Droplet.
@@ -50,12 +50,12 @@ function New-DigitalOceanDroplet
     https://docs.digitalocean.com/reference/api/digitalocean/#tag/Droplets
 
     .OUTPUTS
-    DigitalOcean.Droplet
+    DigitalOceanDroplet
     System.String
   #>
 
     [CmdletBinding(SupportsShouldProcess)]
-    [OutputType([Object], [String])]
+    [OutputType([DigitalOceanDroplet], [String])]
     param
     (
         [Parameter(Mandatory = $true, HelpMessage = "The human-readable string you wish to use when displaying the Droplet name. The name, if set to a domain name managed in the DigitalOcean DNS management system, will configure a PTR record for the Droplet. The name set during creation will also determine the hostname for the Droplet in its internal configuration.")]
@@ -63,8 +63,7 @@ function New-DigitalOceanDroplet
         [String]
         $DropletName,
 
-        [Parameter(HelpMessage = "SSH key object to be added to the Droplet for authentication. Must be a DigitalOcean.Account.SSHKeys object.")]
-        [ValidateScript({ $_.PSObject.TypeNames[0] -eq 'DigitalOcean.Account.SSHKeys' })]
+        [Parameter(HelpMessage = "SSH key object to be added to the Droplet for authentication. Must be a DigitalOceanSSHKey object.")]
         $SSHKey,
 
         [Parameter(HelpMessage = "A boolean indicating whether automated backups should be enabled for the Droplet.")]
@@ -165,7 +164,7 @@ function New-DigitalOceanDroplet
         }
         if ($SSHKey)
         {
-            $Body.Add('ssh_keys', @($($SSHKey.id)))
+            $Body.Add('ssh_keys', @($($SSHKey.Id)))
         }
         if ($Backups)
         {
@@ -201,8 +200,16 @@ function New-DigitalOceanDroplet
             if ($PSCmdlet.ShouldProcess("$($Body | ConvertTo-Json)", "Create"))
             {
                 $response = Invoke-RestMethod -Method Post -Uri $URL -Headers $DigitalOceanConfiguration.Headers -Body ($Body | ConvertTo-Json) -ErrorAction Stop
-                $response.droplet.PSObject.TypeNames.Insert(0, 'DigitalOcean.Droplet')
-                $response.droplet
+
+                if ($null -eq $response -or $null -eq $response.droplet)
+                {
+                    Write-Warning "No valid response received from DigitalOcean API, returning empty droplet object"
+                    $dropletObject = [DigitalOceanDroplet]::new()
+                    return $dropletObject
+                }
+
+                $dropletObject = [DigitalOceanDroplet]::new($response.droplet)
+                return $dropletObject
             }
         }
         catch

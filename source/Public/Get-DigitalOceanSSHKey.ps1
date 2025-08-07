@@ -24,12 +24,12 @@ function Get-DigitalOceanSSHKey
 
     .EXAMPLE
     $sshKeys = Get-DigitalOceanSSHKey
-    $sshKeys | Where-Object { $_.name -like "*production*" }
+    $sshKeys | Where-Object { $_.Name -like "*production*" }
 
     Gets all SSH keys and filters for those containing "production" in the name.
 
     .EXAMPLE
-    Get-DigitalOceanSSHKey | Select-Object name, fingerprint, public_key
+    Get-DigitalOceanSSHKey | Select-Object Name, Fingerprint, PublicKey
 
     Retrieves all SSH keys and displays only the name, fingerprint, and public key.
 
@@ -37,8 +37,8 @@ function Get-DigitalOceanSSHKey
     None. You cannot pipe objects to Get-DigitalOceanSSHKey.
 
     .OUTPUTS
-    DigitalOcean.Account.SSHKeys
-    Returns SSH key objects with properties including name, fingerprint, public_key, and id.
+    DigitalOceanSSHKey
+    Returns SSH key objects with properties including Name, Fingerprint, PublicKey, and Id.
 
     .NOTES
     - Requires a valid DigitalOcean API token to be configured
@@ -53,7 +53,7 @@ function Get-DigitalOceanSSHKey
     #>
 
     [CmdletBinding()]
-    [OutputType('DigitalOcean.Account.SSHKeys')]
+    [OutputType([DigitalOceanSSHKey])]
     param
     (
         [Parameter(
@@ -79,17 +79,17 @@ function Get-DigitalOceanSSHKey
             return
         }
 
-        # Apply type name to each SSH key object
-        foreach ($item in $response.ssh_keys)
+        # Convert to DigitalOceanSSHKey class objects
+        $sshKeyObjects = foreach ($item in $response.ssh_keys)
         {
-            $item.PSObject.TypeNames.Insert(0, 'DigitalOcean.Account.SSHKeys')
+            [DigitalOceanSSHKey]::new($item.id, $item.name, $item.fingerprint, $item.public_key)
         }
 
         # Filter by SSH key name if specified
         if ($PSBoundParameters.ContainsKey('SSHKeyName'))
         {
             Write-Verbose "Filtering for SSH key: $SSHKeyName"
-            $filteredKeys = $response.ssh_keys | Where-Object { $_.name -eq $SSHKeyName }
+            $filteredKeys = $sshKeyObjects | Where-Object { $_.Name -eq $SSHKeyName }
 
             if ($null -eq $filteredKeys)
             {
@@ -101,8 +101,8 @@ function Get-DigitalOceanSSHKey
         }
         else
         {
-            Write-Verbose "Found $($response.ssh_keys.Count) SSH key(s)"
-            Write-Output $response.ssh_keys
+            Write-Verbose "Found $($sshKeyObjects.Count) SSH key(s)"
+            Write-Output $sshKeyObjects
         }
     }
     catch

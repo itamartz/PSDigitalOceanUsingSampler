@@ -11,6 +11,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.2.0] - 2025-08-07
+
+### Added
+
+- Added `DigitalOceanDroplet` PowerShell class with comprehensive 21-property structure
+- Added `New-DigitalOceanDroplet` function to create DigitalOcean Droplets
+- Enhanced class-based architecture with strongly-typed object returns
+- Added comprehensive error handling and parameter validation
+
+### Changed
+
+- Refactored all functions to return strongly-typed class objects instead of PSObjects
+- Enhanced SSH key parameter handling with flexible type support
+- Improved null response handling across all functions
+
+### Fixed
+
+- Fixed parameter binding conflicts in SSH key validation
+- Fixed array type validation in test environment
+- Fixed trailing whitespace PSScriptAnalyzer violations
+
 ## [1.1.0] - 2025-07-27
 
 ### Added
@@ -25,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated module version to 1.1.0
+- Updated module version to 1.2.0
 - Enhanced code coverage from 96.73% to 96.16% with expanded functionality
 - Improved class architecture with better null handling for array properties
 - Updated README with new function documentation and examples

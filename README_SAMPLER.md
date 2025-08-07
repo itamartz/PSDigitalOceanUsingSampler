@@ -41,7 +41,7 @@ Describe -Name $DescribeName {
 ### For patch version bump (1.0.0 → 1.0.1)
 git commit -m "fix: resolve API timeout issue"
 
-# For minor version bump (1.0.0 → 1.1.0)  
+# For minor version bump (1.1.0 → 1.2.0)  
 git commit -m "feature: add support for Droplet management"
 
 # For major version bump (1.0.0 → 2.0.0)
@@ -100,8 +100,8 @@ Your module is configured for automatic publishing when:
 #### Publishing Workflow:
 ```powershell
 # Option A: Tag-based release
-git tag v1.1.0
-git push origin v1.1.0
+git tag v1.2.0
+git push origin v1.2.0
 
 # Option B: Direct push to main (after PR merge)
 git push origin main

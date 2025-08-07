@@ -141,6 +141,7 @@ Get-DigitalOceanAccount
 
 ## Version History
 
+- **v1.2.0**: Enhanced class-based architecture with DigitalOceanDroplet support
 - **v1.1.0**: Initial implementation with cross-platform support
 - Added comprehensive parameter validation
 - Added verbose output for troubleshooting
