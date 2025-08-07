@@ -20,8 +20,6 @@ Welcome to the PSDigitalOcean PowerShell module documentation wiki!
 - [Get-DigitalOceanSSHKey](Get-DigitalOceanSSHKey)
 - [Get-DigitalOceanVPC](Get-DigitalOceanVPC)
 - [New-DigitalOceanDroplet](New-DigitalOceanDroplet)
-- [Get-DigitalOceanVPC](Get-DigitalOceanVPC)
-- [New-DigitalOceanDroplet](New-DigitalOceanDroplet)
 
 ### Advanced Topics
 
