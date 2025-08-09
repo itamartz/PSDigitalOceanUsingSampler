@@ -30,7 +30,7 @@
     Copyright            = '(c) Itamar Tziger. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description          = 'A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage (98.95% with 471 tests). Features complete class-based architecture, robust error handling, and full API integration.'
+    Description          = 'A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage (79% with 549 tests). Features complete class-based architecture, robust error handling, and full API integration including volume management.'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion    = '5.0'
@@ -78,7 +78,8 @@
         'Get-DigitalOceanSSHKey',
         'Get-DigitalOceanVolume',
         'Get-DigitalOceanVPC',
-        'New-DigitalOceanDroplet'
+        'New-DigitalOceanDroplet',
+        'New-DigitalOceanVolume'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
