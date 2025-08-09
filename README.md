@@ -4,14 +4,14 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-79%25-green.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-97.51%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **79% Test Coverage** with 549 comprehensive passing tests  
-   using Pester v5  
+✅ **97.51% Test Coverage** with 558 comprehensive tests  
+   (549 passed, 9 skipped) using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
    Account, Team, Image, Region, Size, SSH Key, VPC, and Droplet objects  
 ✅ **Comprehensive Error Handling** and defensive programming patterns  
@@ -30,13 +30,14 @@ ModuleBuilder integration
 🎉 **New Volume Creation Feature!**
 
 - ⚡ **New Function**: Added `New-DigitalOceanVolume` for creating DigitalOcean volumes
-- 📊 **Test Coverage**: Maintained 79% coverage with 549 passing tests (+32 tests)
+- 📊 **Test Coverage**: Excellent 97.51% coverage with 558 tests  
+  (549 passed, 9 skipped)
 - 🔧 **Volume Operations**: Support for creating volumes with custom  
   filesystem types and labels
 - 🌟 **Enhanced Testing**: Improved Get-DigitalOceanVolume coverage with  
   comprehensive error handling
 - ✅ **Quality Assured**: Full PSScriptAnalyzer compliance and  
-  comprehensive test coverage
+  enterprise-grade test coverage
 
 ## 📦 Installation
 

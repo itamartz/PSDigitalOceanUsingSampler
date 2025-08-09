@@ -106,6 +106,7 @@ New function instructions:
 After we run .\build.ps1 (-AutoRestore) and it pass we doing the following:
 
 - run code coverage tests and update the `README.md` file with the new code coverage and test counts
+- find where we have a date in markdown files and update it to the current date
 - create a new wiki page for the new function in the `wiki` folder.
 - update the version number in the `source/PSDigitalOcean.psd1` file.
 - update the `CHANGELOG.md` file with the new version number and changes.

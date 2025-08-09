@@ -30,7 +30,7 @@
     Copyright            = '(c) Itamar Tziger. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description          = 'A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage (79% with 549 tests). Features complete class-based architecture, robust error handling, and full API integration including volume management.'
+    Description          = 'A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage (97.51% with 558 tests). Features complete class-based architecture, robust error handling, and full API integration including volume management.'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion    = '5.0'
@@ -132,12 +132,12 @@
 ### Changed
 - Improved Get-DigitalOceanVolume coverage from 83.13% to 97.51%
 - Enhanced error handling across volume management functions
-- Updated module statistics: 79% coverage with 549 tests
+- Updated module statistics: 97.51% coverage with 558 tests
 - Expanded test suite with robust error scenario validation
 - Updated documentation with v1.6.0 features and examples
 
 ### Quality Improvements
-- Enterprise-grade reliability with 79% test coverage maintained
+- Enterprise-grade reliability with 97.51% test coverage maintained
 - 558 total tests (549 passed, 0 failed, 9 skipped)
 - Full PSScriptAnalyzer compliance across all new functions
 - Comprehensive parameter validation and error handling
