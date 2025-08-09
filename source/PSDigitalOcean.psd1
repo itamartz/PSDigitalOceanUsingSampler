@@ -12,7 +12,7 @@
     RootModule           = 'PSDigitalOcean.psm1'
 
     # Version number of this module.
-    ModuleVersion        = '1.6.1'
+    ModuleVersion        = '1.7.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -30,7 +30,7 @@
     Copyright            = '(c) Itamar Tziger. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description          = 'A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage (97.51% with 558 tests). Features complete class-based architecture, robust error handling, and full API integration including volume management.'
+    Description          = 'A comprehensive PowerShell module for managing DigitalOcean resources with enterprise-grade reliability and extensive test coverage (96.03% with 599 tests). Features complete class-based architecture, robust error handling, and full API integration including comprehensive volume management.'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion    = '5.0'
@@ -79,7 +79,8 @@
         'Get-DigitalOceanVolume',
         'Get-DigitalOceanVPC',
         'New-DigitalOceanDroplet',
-        'New-DigitalOceanVolume'
+        'New-DigitalOceanVolume',
+        'Remove-DigitalOceanVolume'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

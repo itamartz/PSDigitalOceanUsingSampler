@@ -11,6 +11,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.7.0] - 2025-08-10
+
+### Added
+
+- **New Function**: `Remove-DigitalOceanVolume` - Comprehensive volume deletion function with dual deletion methods
+  - Support for deletion by Volume ID or by Name+Region combination
+  - ShouldProcess support with high-impact confirmation for safe operations
+  - Comprehensive error handling with detailed API error response parsing
+  - URL encoding for all parameters to handle special characters
+  - Verbose logging for operation tracking and debugging
+  - Parameter aliases (Id for VolumeId, VolumeName for Name) for user convenience
+- **35 Unit Tests** for `Remove-DigitalOceanVolume` covering all scenarios including edge cases
+- **Real API Integration Testing** with successful validation using actual DigitalOcean volumes
+- **Enhanced Test Coverage** increased from 95.89% to 96.03% with 599 total tests
+
+### Changed
+
+- Updated module description to include volume management capabilities
+- Enhanced README.md with new function documentation and updated statistics
+- Added Volume class to the list of supported PowerShell classes
+
 ## [1.6.1] - 2025-08-10
 
 ### Fixed

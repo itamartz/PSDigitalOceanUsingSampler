@@ -1,19 +1,34 @@
 # PSDigitalOcean
 
-A comprehensive PowerShell module for managing DigitalOcean resources with
+A compre## 🆕 Latest Updates (v1.7.0)
+
+🚀 **New Remove-DigitalOceanVolume Function**
+
+- ✨ **New Function**: Remove-DigitalOceanVolume with dual deletion methods  
+  (by ID or name+region)
+- 🛡️ **Enhanced Security**: High-impact confirmation with ShouldProcess  
+  support
+- 🔍 **Comprehensive Testing**: 35 dedicated unit tests plus real API  
+  integration testing
+- 📊 **Improved Coverage**: Increased to 96.03% test coverage with 599  
+  total tests
+- ✅ **Production Ready**: Fully validated with real DigitalOcean API calls
+- 🎯 **Robust Error Handling**: Detailed API error parsing and  
+  user-friendly messageswerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-95.89%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-96.03%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **95.89% Test Coverage** with 549 comprehensive tests  
-   (549 passed, 9 skipped) using Pester v5  
+✅ **96.03% Test Coverage** with 599 comprehensive tests  
+   (590 passed, 9 skipped) using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
-   Account, Team, Image, Region, Size, SSH Key, VPC, and Droplet objects  
+   Account, Team, Image, Region, Size, SSH Key, VPC, Volume, and  
+   Droplet objects  
 ✅ **Comprehensive Error Handling** and defensive programming patterns  
    throughout  
 ✅ **CI/CD Pipeline** with Azure Pipelines configuration for automated  
@@ -289,6 +304,10 @@ PSDigitalOcean/
   DigitalOcean account
 - `New-DigitalOceanDroplet` - Create new DigitalOcean Droplets with comprehensive  
   configuration options including SSH keys, backups, monitoring, and user data
+- `New-DigitalOceanVolume` - Create new DigitalOcean volumes with filesystem  
+  configuration and snapshot support
+- `Remove-DigitalOceanVolume` - Remove DigitalOcean volumes by ID or name+region  
+  with comprehensive error handling and ShouldProcess support
 
 ### Private Functions
 
