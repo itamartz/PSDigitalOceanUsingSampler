@@ -34,7 +34,8 @@ $BaseModulePath = "C:\Users\Itamartz\Documents\WindowsPowerShell\Modules\PSDigit
 # Find the latest version directory
 Write-Host "🔍 Finding latest module version..." -ForegroundColor Yellow
 $versionDirs = Get-ChildItem -Path $BaseModulePath -Directory | Where-Object { $_.Name -match '^\d+\.\d+\.\d+$' }
-if (-not $versionDirs) {
+if (-not $versionDirs)
+{
     Write-Error "No version directories found in $BaseModulePath"
     Write-Host "💡 Run .\build.ps1 -AutoRestore -Tasks build first" -ForegroundColor Magenta
     exit 1
@@ -52,7 +53,8 @@ Write-Host "📁 Checking module path..." -ForegroundColor Yellow
 Write-Host "🔍 Detected version: $($latestVersion.Name)" -ForegroundColor Cyan
 Write-Host "📂 Module path: $ModulePath" -ForegroundColor Cyan
 
-if (-not (Test-Path $ModulePath)) {
+if (-not (Test-Path $ModulePath))
+{
     Write-Error "Module path not found: $ModulePath"
     Write-Host "💡 Run .\build.ps1 -AutoRestore -Tasks build first" -ForegroundColor Magenta
     exit 1
@@ -61,44 +63,58 @@ Write-Host "✅ Module path found" -ForegroundColor Green
 
 # Step 2: Validate manifest
 Write-Host "📋 Validating module manifest..." -ForegroundColor Yellow
-try {
+try
+{
     $manifest = Test-ModuleManifest -Path $ManifestPath -ErrorAction Stop
     Write-Host "✅ Manifest valid - Version: $($manifest.Version)" -ForegroundColor Green
-} catch {
+}
+catch
+{
     Write-Error "Manifest validation failed: $($_.Exception.Message)"
     exit 1
 }
 
 # Step 3: Check current versions in gallery
 Write-Host "🔍 Checking PowerShell Gallery versions..." -ForegroundColor Yellow
-try {
+try
+{
     $existingVersions = Find-Module -Name PSDigitalOcean -Repository PSGallery -AllVersions -ErrorAction SilentlyContinue
-    if ($existingVersions) {
+    if ($existingVersions)
+    {
         $latestVersion = ($existingVersions | Sort-Object Version -Descending)[0].Version
         Write-Host "📦 Latest version in gallery: $latestVersion" -ForegroundColor Cyan
 
-        if ($latestVersion -ge $manifest.Version -and -not $Force) {
+        if ($latestVersion -ge $manifest.Version -and -not $Force)
+        {
             Write-Warning "Version $($manifest.Version) is not greater than existing version $latestVersion"
             Write-Host "💡 Use -Force to override or increment the version" -ForegroundColor Magenta
             exit 1
         }
-    } else {
+    }
+    else
+    {
         Write-Host "📦 No existing versions found in gallery" -ForegroundColor Cyan
     }
-} catch {
+}
+catch
+{
     Write-Warning "Could not check existing versions: $($_.Exception.Message)"
 }
 
 # Step 4: Get API key if not provided
-if (-not $ApiKey -and -not $WhatIfPreference) {
+if (-not $ApiKey -and -not $WhatIfPreference)
+{
     Write-Host "🔑 API Key required for publishing" -ForegroundColor Yellow
     Write-Host "Get your API key from: https://www.powershellgallery.com/account/apikeys" -ForegroundColor Cyan
 
     # Try to get API key securely
-    try {
+    try
+    {
         $secureApiKey = Read-Host -Prompt "Enter your PowerShell Gallery API Key" -AsSecureString
         $ApiKey = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureApiKey))
-    } catch {
+    }
+    catch
+    {
         Write-Error "Failed to get API key: $($_.Exception.Message)"
         exit 1
     }
@@ -106,22 +122,32 @@ if (-not $ApiKey -and -not $WhatIfPreference) {
 
 # Step 5: Prepare publish parameters
 $publishParams = @{
-    Path = $ModulePath
+    Path       = $ModulePath
     Repository = 'PSGallery'
-    Verbose = $true
+    Verbose    = $true
 }
 
 # Check which publish command is available and use appropriate parameter name
 $publishCommand = 'Publish-Module'
-if (Get-Command 'Publish-PSResource' -ErrorAction SilentlyContinue) {
+if (Get-Command 'Publish-PSResource' -ErrorAction SilentlyContinue)
+{
     $publishCommand = 'Publish-PSResource'
-    if ($ApiKey) { $publishParams.ApiKey = $ApiKey }
-} else {
+    if ($ApiKey)
+    {
+        $publishParams.ApiKey = $ApiKey 
+    }
+}
+else
+{
     # For older PowerShell versions, use NuGetApiKey parameter
-    if ($ApiKey) { $publishParams.NuGetApiKey = $ApiKey }
+    if ($ApiKey)
+    {
+        $publishParams.NuGetApiKey = $ApiKey 
+    }
 }
 
-if ($WhatIfPreference) {
+if ($WhatIfPreference)
+{
     $publishParams.WhatIf = $true
 }
 
@@ -130,14 +156,17 @@ Write-Host "📤 Publishing to PowerShell Gallery using $publishCommand..." -For
 Write-Host "Module: PSDigitalOcean v$($manifest.Version)" -ForegroundColor Cyan
 Write-Host "Path: $ModulePath" -ForegroundColor Cyan
 
-try {
-    if ($WhatIfPreference) {
+try
+{
+    if ($WhatIfPreference)
+    {
         Write-Host "🔍 Running in WhatIf mode..." -ForegroundColor Magenta
     }
 
     & $publishCommand @publishParams
 
-    if (-not $WhatIfPreference) {
+    if (-not $WhatIfPreference)
+    {
         Write-Host ""
         Write-Host "🎉 SUCCESS! PSDigitalOcean v$($manifest.Version) published!" -ForegroundColor Green
         Write-Host "=================================" -ForegroundColor Green
@@ -148,11 +177,15 @@ try {
         Write-Host "Find-Module -Name PSDigitalOcean -Repository PSGallery" -ForegroundColor White
         Write-Host ""
         Write-Host "⏰ Note: It may take a few minutes for the new version to appear in search results." -ForegroundColor Yellow
-    } else {
+    }
+    else
+    {
         Write-Host "✅ WhatIf completed successfully" -ForegroundColor Green
     }
 
-} catch {
+}
+catch
+{
     Write-Host ""
     Write-Error "❌ Publication failed: $($_.Exception.Message)"
     Write-Host ""
