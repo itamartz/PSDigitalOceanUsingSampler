@@ -11,6 +11,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.6.1] - 2025-08-10
+
+### Fixed
+
+- Enhanced error handling in `New-DigitalOceanVolume` with detailed API error response parsing
+- Resolved API integration issues for volume creation operations
+- Improved error messages to show actual DigitalOcean API responses
+
+### Changed
+
+- Updated development guidelines with integration testing requirements for non-GET functions
+- Enhanced documentation for `New-DigitalOceanDroplet` parameter help
+
 ## [1.6.0] - 2025-08-10
 
 ### Added

@@ -4,13 +4,13 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-97.51%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-95.89%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **97.51% Test Coverage** with 558 comprehensive tests  
+✅ **95.89% Test Coverage** with 549 comprehensive tests  
    (549 passed, 9 skipped) using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
    Account, Team, Image, Region, Size, SSH Key, VPC, and Droplet objects  
@@ -25,19 +25,16 @@ ModuleBuilder integration
 ✅ **Enterprise Ready** with full parameter validation, pagination support, and  
    robust API integration
 
-## 🆕 Latest Updates (v1.6.0)
+## 🆕 Latest Updates (v1.6.1)
 
-🎉 **New Volume Creation Feature!**
+🔧 **Bug Fix and Error Handling Enhancement**
 
-- ⚡ **New Function**: Added `New-DigitalOceanVolume` for creating DigitalOcean volumes
-- 📊 **Test Coverage**: Excellent 97.51% coverage with 558 tests  
-  (549 passed, 9 skipped)
-- 🔧 **Volume Operations**: Support for creating volumes with custom  
-  filesystem types and labels
-- 🌟 **Enhanced Testing**: Improved Get-DigitalOceanVolume coverage with  
-  comprehensive error handling
-- ✅ **Quality Assured**: Full PSScriptAnalyzer compliance and  
-  enterprise-grade test coverage
+- 🐛 **Fixed**: New-DigitalOceanVolume API integration issues resolved
+- � **Enhanced Error Handling**: Improved API error reporting with detailed response parsing  
+- � **Documentation**: Updated New-DigitalOceanDroplet parameter documentation
+- 🧪 **Integration Testing**: Added critical integration testing requirements for non-GET functions
+- 📊 **Test Coverage**: Maintained excellent 95.89% coverage with 549 tests
+- ✅ **Quality Assured**: Real API validation ensures production reliability
 
 ## 📦 Installation
 
