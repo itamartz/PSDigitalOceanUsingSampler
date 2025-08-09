@@ -15,7 +15,7 @@ New-DigitalOceanDroplet
 ```
 New-DigitalOceanDroplet -DropletName <String> [-SSHKey <Object>] [-Backups <Boolean>] [-IPV6 <Boolean>]
  [-Monitoring <Boolean>] [-Tags <String[]>] [-UserData <String>] [-Volumes <String[]>] [-Region <String>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] -Size <String> -Image <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -204,6 +204,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Image
+The slug identifier for a public image. This image will be the base image for your Droplet.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ProgressAction
 {{ Fill ProgressAction Description }}
 
@@ -213,6 +228,21 @@ Parameter Sets: (All)
 Aliases: proga
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Size
+The slug identifier for the size that you wish to select for this Droplet.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
