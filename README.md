@@ -4,13 +4,13 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-98.95%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-97%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **98.95% Test Coverage** with 471 comprehensive passing tests  
+✅ **97% Test Coverage** with 517 comprehensive passing tests  
    using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
    Account, Team, Image, Region, Size, SSH Key, VPC, and Droplet objects  
@@ -25,18 +25,15 @@ ModuleBuilder integration
 ✅ **Enterprise Ready** with full parameter validation, pagination support, and  
    robust API integration
 
-## 🆕 Latest Updates (v1.4.0)
+## 🆕 Latest Updates (v1.5.0)
 
-🎉 **Major Quality Milestone Achieved!**
+🎉 **New Volume Management Feature!**
 
-- ⬆️ **Code Coverage**: Improved from 82.55% to **98.95%** (+16.4%)
-- 📈 **Test Suite**: Expanded from 394 to **471 tests** (+77 tests)
-- 🔧 **Enhanced Testing**: Complete edge case coverage for all PowerShell  
-  classes
-- 🎯 **Constructor Coverage**: Full testing of complex object initialization  
-  logic
-- ✅ **Enterprise Grade**: Now exceeds 98% coverage threshold for production  
-  use
+- ⚡ **New Function**: Added `Get-DigitalOceanVolume` for comprehensive volume management
+- � **Test Coverage**: Maintained 97% coverage with 517 passing tests (+46 tests)
+- 🔧 **Volume Operations**: Support for volume retrieval by ID, name, and listing with filters
+- � **Regional Filtering**: Enhanced with region-based volume filtering capabilities
+- ✅ **Quality Assured**: Full PSScriptAnalyzer compliance and comprehensive test coverage
 
 ## 📦 Installation
 
@@ -116,6 +113,25 @@ Get-DigitalOceanSSHKey
 
 # Get a specific SSH key by name
 Get-DigitalOceanSSHKey -SSHKeyName "my-laptop-key"
+```
+
+### Get Volumes
+
+```powershell
+# Get volume by ID
+Get-DigitalOceanVolume -VolumeId "506f78a4-e098-11e5-ad9f-000f53306ae1"
+
+# Get volumes by name
+Get-DigitalOceanVolume -VolumeName "my-volume"
+
+# Get volumes in a specific region
+Get-DigitalOceanVolume -Region "nyc1"
+
+# List all volumes with pagination
+Get-DigitalOceanVolume -Page 1 -Limit 20
+
+# Get all volumes at once
+Get-DigitalOceanVolume -All
 ```
 
 ### Get VPCs (Virtual Private Clouds)
@@ -266,6 +282,8 @@ PSDigitalOcean/
 - `Get-DigitalOceanSize` - Retrieve DigitalOcean Droplet sizes with pagination support
 - `Get-DigitalOceanSSHKey` - Retrieve SSH keys from DigitalOcean account with  
   filtering support
+- `Get-DigitalOceanVolume` - Retrieve DigitalOcean volumes with support for  
+  ID, name, and region-based filtering
 - `Get-DigitalOceanVPC` - Retrieve Virtual Private Cloud (VPC) information from  
   DigitalOcean account
 - `New-DigitalOceanDroplet` - Create new DigitalOcean Droplets with comprehensive  

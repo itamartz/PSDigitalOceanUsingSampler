@@ -11,6 +11,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.5.0] - 2025-08-07
+
+### Added
+
+- Added new `Get-DigitalOceanVolume` function with comprehensive volume management capabilities
+- Support for volume retrieval by ID using the ById parameter set
+- Support for volume retrieval by name using the ByName parameter set  
+- Support for volume listing with pagination using the List parameter set
+- Support for retrieving all volumes using the All parameter set
+- Regional filtering support for volume operations
+- URL encoding for special characters in volume IDs, names, and region parameters
+- Comprehensive test coverage with 11 new unit tests for volume functionality
+- PowerShell class DigitalOceanVolume with proper property mapping and methods
+
+### Changed
+
+- Updated module version to 1.5.0
+- Increased test count from 471 to 517 tests (+46 tests)
+- Maintained 97% code coverage with new volume functionality
+
+### Fixed
+
+- Fixed PSScriptAnalyzer trailing whitespace issues in Get-DigitalOceanVolume function
+
 ## [1.4.0] - 2025-08-07
 
 ### Added
