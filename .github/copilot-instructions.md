@@ -101,6 +101,19 @@ New function instructions:
 - Use `PSScriptAnalyzer` 'should not use the `Write-Host` cmdlet.'
 - Use `PSScriptAnalyzer` 'Line has trailing whitespace.'
 
+## Integration Testing Requirements
+
+**CRITICAL**: Functions that are NOT GET functions (Create, Update, Delete operations) MUST be tested with real API calls:
+
+- **Unit Tests**: Use mocking for code coverage and parameter validation
+- **Integration Tests**: Test non-GET functions with real DigitalOcean API calls using actual tokens
+- **Real API Validation**: Before committing any New-, Set-, Remove-, or other mutating functions, test with actual API endpoints
+- **Test Environment**: Use test/development DigitalOcean account for integration testing to avoid affecting production resources
+- **Error Validation**: Verify that real API error responses are handled correctly, not just mocked error scenarios
+- **WhatIf vs Real**: Ensure WhatIf validation matches actual API requirements - test both scenarios
+
+This prevents publishing functions that pass all unit tests but fail with real API calls due to parameter formatting, validation differences, or API requirement mismatches.
+
 # Configuration Guide for PSDigitalOcean Module
 
 After we run .\build.ps1 (-AutoRestore) and it pass we doing the following:

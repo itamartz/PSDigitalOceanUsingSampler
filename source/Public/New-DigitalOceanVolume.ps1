@@ -110,12 +110,13 @@ function New-DigitalOceanVolume
 
         [Parameter(ParameterSetName = 'CreateNew', HelpMessage = 'The filesystem label')]
         [ValidateScript({
-            param($Value)
-            if ($Value.Length -gt 16) {
-                throw "FilesystemLabel cannot exceed 16 characters (ext4) or 12 characters (xfs)"
-            }
-            return $true
-        })]
+                param($Value)
+                if ($Value.Length -gt 16)
+                {
+                    throw "FilesystemLabel cannot exceed 16 characters (ext4) or 12 characters (xfs)"
+                }
+                return $true
+            })]
         [string]$FilesystemLabel,
 
         [Parameter(HelpMessage = 'Description for the volume')]
@@ -279,6 +280,36 @@ function New-DigitalOceanVolume
         catch
         {
             $errorMessage = "Failed to create DigitalOcean volume '$Name': $($_.Exception.Message)"
+
+            # Try to extract API error details
+            if ($_.Exception.Response)
+            {
+                try
+                {
+                    $responseStream = $_.Exception.Response.GetResponseStream()
+                    $reader = New-Object System.IO.StreamReader($responseStream)
+                    $responseBody = $reader.ReadToEnd()
+                    $reader.Close()
+
+                    if ($responseBody)
+                    {
+                        $apiError = $responseBody | ConvertFrom-Json
+                        if ($apiError.message)
+                        {
+                            $errorMessage += " API Error: $($apiError.message)"
+                        }
+                        if ($apiError.errors)
+                        {
+                            $errorMessage += " Details: $($apiError.errors | ConvertTo-Json -Compress)"
+                        }
+                        Write-Verbose "Full API Response: $responseBody"
+                    }
+                }
+                catch
+                {
+                    Write-Verbose "Could not parse API error response"
+                }
+            }
 
             # Re-throw specific token-related errors
             if ($_.Exception.Message -like "*token*")
