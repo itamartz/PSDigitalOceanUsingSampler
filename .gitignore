@@ -1,5 +1,8 @@
 output/
 
+# Prevent version directories in root
+/[0-9]*/
+
 **.bak
 *.local.*
 !**/README.md
