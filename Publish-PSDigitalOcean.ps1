@@ -22,24 +22,36 @@ param(
     [string]$ApiKey,
 
     [Parameter(Mandatory = $false)]
-    [switch]$WhatIf,
-
-    [Parameter(Mandatory = $false)]
     [switch]$Force
 )
 
 # Set error action preference
 $ErrorActionPreference = 'Stop'
 
-# Define paths
-$ModulePath = "C:\Users\Itamartz\Documents\WindowsPowerShell\Modules\PSDigitalOcean\output\module\PSDigitalOcean\1.4.0"
+# Define base paths
+$BaseModulePath = "C:\Users\Itamartz\Documents\WindowsPowerShell\Modules\PSDigitalOcean\output\module\PSDigitalOcean"
+
+# Find the latest version directory
+Write-Host "🔍 Finding latest module version..." -ForegroundColor Yellow
+$versionDirs = Get-ChildItem -Path $BaseModulePath -Directory | Where-Object { $_.Name -match '^\d+\.\d+\.\d+$' }
+if (-not $versionDirs) {
+    Write-Error "No version directories found in $BaseModulePath"
+    Write-Host "💡 Run .\build.ps1 -AutoRestore -Tasks build first" -ForegroundColor Magenta
+    exit 1
+}
+
+$latestVersion = ($versionDirs | Sort-Object { [Version]$_.Name } -Descending)[0]
+$ModulePath = $latestVersion.FullName
 $ManifestPath = Join-Path $ModulePath "PSDigitalOcean.psd1"
 
-Write-Host "🚀 PSDigitalOcean Publisher v1.4.0" -ForegroundColor Cyan
+Write-Host "🚀 PSDigitalOcean Publisher - Dynamic Version Finder" -ForegroundColor Cyan
 Write-Host "=================================" -ForegroundColor Cyan
 
-# Step 1: Validate module path exists
+# Step 1: Validate module path exists and show detected version
 Write-Host "📁 Checking module path..." -ForegroundColor Yellow
+Write-Host "🔍 Detected version: $($latestVersion.Name)" -ForegroundColor Cyan
+Write-Host "📂 Module path: $ModulePath" -ForegroundColor Cyan
+
 if (-not (Test-Path $ModulePath)) {
     Write-Error "Module path not found: $ModulePath"
     Write-Host "💡 Run .\build.ps1 -AutoRestore -Tasks build first" -ForegroundColor Magenta
@@ -78,7 +90,7 @@ try {
 }
 
 # Step 4: Get API key if not provided
-if (-not $ApiKey -and -not $WhatIf) {
+if (-not $ApiKey -and -not $WhatIfPreference) {
     Write-Host "🔑 API Key required for publishing" -ForegroundColor Yellow
     Write-Host "Get your API key from: https://www.powershellgallery.com/account/apikeys" -ForegroundColor Cyan
 
@@ -109,7 +121,7 @@ if (Get-Command 'Publish-PSResource' -ErrorAction SilentlyContinue) {
     if ($ApiKey) { $publishParams.NuGetApiKey = $ApiKey }
 }
 
-if ($WhatIf) {
+if ($WhatIfPreference) {
     $publishParams.WhatIf = $true
 }
 
@@ -119,13 +131,13 @@ Write-Host "Module: PSDigitalOcean v$($manifest.Version)" -ForegroundColor Cyan
 Write-Host "Path: $ModulePath" -ForegroundColor Cyan
 
 try {
-    if ($WhatIf) {
+    if ($WhatIfPreference) {
         Write-Host "🔍 Running in WhatIf mode..." -ForegroundColor Magenta
     }
 
     & $publishCommand @publishParams
 
-    if (-not $WhatIf) {
+    if (-not $WhatIfPreference) {
         Write-Host ""
         Write-Host "🎉 SUCCESS! PSDigitalOcean v$($manifest.Version) published!" -ForegroundColor Green
         Write-Host "=================================" -ForegroundColor Green
