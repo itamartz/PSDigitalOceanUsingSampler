@@ -4,13 +4,13 @@ A comprehensive PowerShell module for managing DigitalOcean resources with
 enterprise-grade reliability and extensive test coverage.
 
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/PSDigitalOcean.svg)](https://www.powershellgallery.com/packages/PSDigitalOcean)
-[![Code Coverage](https://img.shields.io/badge/coverage-97%25-brightgreen.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
+[![Code Coverage](https://img.shields.io/badge/coverage-79%25-green.svg)](https://codecov.io/gh/itamartz/PSDigitalOceanUsingSampler)
 
 ## 🚀 Key Features
 
 ✅ **Complete PowerShell Module** with proper structure and modern  
 development practices  
-✅ **97% Test Coverage** with 517 comprehensive passing tests  
+✅ **79% Test Coverage** with 549 comprehensive passing tests  
    using Pester v5  
 ✅ **Class-based Architecture** with strongly-typed PowerShell classes for  
    Account, Team, Image, Region, Size, SSH Key, VPC, and Droplet objects  
@@ -25,15 +25,18 @@ ModuleBuilder integration
 ✅ **Enterprise Ready** with full parameter validation, pagination support, and  
    robust API integration
 
-## 🆕 Latest Updates (v1.5.0)
+## 🆕 Latest Updates (v1.6.0)
 
-🎉 **New Volume Management Feature!**
+🎉 **New Volume Creation Feature!**
 
-- ⚡ **New Function**: Added `Get-DigitalOceanVolume` for comprehensive volume management
-- � **Test Coverage**: Maintained 97% coverage with 517 passing tests (+46 tests)
-- 🔧 **Volume Operations**: Support for volume retrieval by ID, name, and listing with filters
-- � **Regional Filtering**: Enhanced with region-based volume filtering capabilities
-- ✅ **Quality Assured**: Full PSScriptAnalyzer compliance and comprehensive test coverage
+- ⚡ **New Function**: Added `New-DigitalOceanVolume` for creating DigitalOcean volumes
+- 📊 **Test Coverage**: Maintained 79% coverage with 549 passing tests (+32 tests)
+- 🔧 **Volume Operations**: Support for creating volumes with custom  
+  filesystem types and labels
+- 🌟 **Enhanced Testing**: Improved Get-DigitalOceanVolume coverage with  
+  comprehensive error handling
+- ✅ **Quality Assured**: Full PSScriptAnalyzer compliance and  
+  comprehensive test coverage
 
 ## 📦 Installation
 
