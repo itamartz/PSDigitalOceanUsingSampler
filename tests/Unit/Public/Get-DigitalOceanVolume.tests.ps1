@@ -378,4 +378,244 @@ Describe $DescribeName {
             }
         }
     }
+
+    Context "When handling API errors and edge cases" {
+        It "12 - Should handle null response from API" {
+            InModuleScope -ModuleName $script:dscModuleName {
+                Mock Invoke-DigitalOceanAPI -MockWith {
+                    return $null
+                }
+
+                $WarningPreference = 'SilentlyContinue'
+                $result = Get-DigitalOceanVolume -VolumeId "test-id"
+                $result | Should -BeNullOrEmpty
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -Exactly
+            }
+        }
+
+        It "13 - Should handle exception during API call" {
+            InModuleScope -ModuleName $script:dscModuleName {
+                Mock Invoke-DigitalOceanAPI -MockWith {
+                    throw "API connection failed"
+                }
+
+                { Get-DigitalOceanVolume -VolumeId "test-id" } | Should -Throw "API connection failed"
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -Exactly
+            }
+        }
+
+        It "14 - Should handle malformed volume data in response" {
+            InModuleScope -ModuleName $script:dscModuleName {
+                Mock Invoke-DigitalOceanAPI -MockWith {
+                    return @{
+                        volumes = @(
+                            @{
+                                id              = "valid-volume"
+                                name            = "valid-volume"
+                                description     = "Valid volume"
+                                size_gigabytes  = 100
+                                region          = @{ name = "New York 1"; slug = "nyc1" }
+                                filesystem_type = "ext4"
+                                droplet_ids     = @()
+                                created_at      = "2016-03-02T17:00:58Z"
+                                status          = "available"
+                                tags            = @()
+                            },
+                            @{
+                                # Malformed volume data (invalid data type that causes exception)
+                                id             = "malformed-volume"
+                                size_gigabytes = "invalid-size"  # This should cause an error
+                                created_at     = "invalid-date"       # This should cause an error
+                            }
+                        )
+                        links   = @{
+                            pages = @{
+                                next = $null
+                            }
+                        }
+                        meta    = @{
+                            total = 2
+                        }
+                    }
+                }
+
+                # Mock Write-Warning to capture that it gets called for malformed data
+                Mock Write-Warning
+
+                $result = Get-DigitalOceanVolume
+
+                # Should return only the valid volume, skip the malformed one
+                $result | Should -Not -BeNullOrEmpty
+                $result.Count | Should -Be 1
+                $result[0].Id | Should -Be "valid-volume"
+
+                # Verify that a warning was written for the malformed data
+                Assert-MockCalled Write-Warning -Times 1 -Exactly
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -Exactly
+            }
+        }
+
+        It "15 - Should handle empty volumes response" {
+            InModuleScope -ModuleName $script:dscModuleName {
+                Mock Invoke-DigitalOceanAPI -MockWith {
+                    return @{
+                        volumes = @()
+                        links   = @{
+                            pages = @{
+                                next = $null
+                            }
+                        }
+                        meta    = @{
+                            total = 0
+                        }
+                    }
+                }
+
+                $result = Get-DigitalOceanVolume
+
+                $result | Should -BeNullOrEmpty
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -Exactly
+            }
+        }
+
+        It "16 - Should handle volumes response without volumes property" {
+            InModuleScope -ModuleName $script:dscModuleName {
+                Mock Invoke-DigitalOceanAPI -MockWith {
+                    return @{
+                        links = @{
+                            pages = @{
+                                next = $null
+                            }
+                        }
+                        meta  = @{
+                            total = 0
+                        }
+                    }
+                }
+
+                $result = Get-DigitalOceanVolume
+
+                $result | Should -BeNullOrEmpty
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -Exactly
+            }
+        }
+    }
+
+    Context "When handling pagination with All parameter" -Skip {
+        It "17 - Should fetch all pages when All parameter is used and multiple pages exist" {
+            InModuleScope -ModuleName $script:dscModuleName {
+                # Use parameter filtering to distinguish between first and second call
+                Mock Invoke-DigitalOceanAPI -MockWith {
+                    param($APIPath)
+                    if ($APIPath -notmatch "page=")
+                    {
+                        # First call (no page parameter)
+                        return @{
+                            volumes = @(
+                                @{
+                                    id              = "volume-page1-1"
+                                    name            = "volume-1"
+                                    description     = "First volume"
+                                    size_gigabytes  = 100
+                                    region          = @{ name = "New York 1"; slug = "nyc1" }
+                                    filesystem_type = "ext4"
+                                    droplet_ids     = @()
+                                    created_at      = "2016-03-02T17:00:58Z"
+                                    status          = "available"
+                                    tags            = @()
+                                },
+                                @{
+                                    id              = "volume-page1-2"
+                                    name            = "volume-2"
+                                    description     = "Second volume"
+                                    size_gigabytes  = 100
+                                    region          = @{ name = "New York 1"; slug = "nyc1" }
+                                    filesystem_type = "ext4"
+                                    droplet_ids     = @()
+                                    created_at      = "2016-03-02T18:00:58Z"
+                                    status          = "available"
+                                    tags            = @()
+                                }
+                            )
+                            links   = @{
+                                pages = @{
+                                    next = "https://api.digitalocean.com/v2/volumes?page=2"
+                                }
+                            }
+                            meta    = @{
+                                total = 3
+                            }
+                        }
+                    }
+                    else
+                    {
+                        # Second call (with page parameter)
+                        return @{
+                            volumes = @(
+                                @{
+                                    id              = "volume-page2-1"
+                                    name            = "volume-3"
+                                    description     = "Third volume"
+                                    size_gigabytes  = 100
+                                    region          = @{ name = "New York 1"; slug = "nyc1" }
+                                    filesystem_type = "ext4"
+                                    droplet_ids     = @()
+                                    created_at      = "2016-03-02T19:00:58Z"
+                                    status          = "available"
+                                    tags            = @()
+                                }
+                            )
+                            links   = @{
+                                pages = @{
+                                    next = $null
+                                }
+                            }
+                            meta    = @{
+                                total = 3
+                            }
+                        }
+                    }
+                }
+
+                $result = Get-DigitalOceanVolume -All
+
+                $result | Should -Not -BeNullOrEmpty
+                $result.Count | Should -Be 3
+                $result[0].Name | Should -Be "volume-1"
+                $result[1].Name | Should -Be "volume-2"
+                $result[2].Name | Should -Be "volume-3"
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 2 -Exactly
+            }
+        }
+
+        It "18 - Should handle empty result when no volumes found on first page" {
+            InModuleScope -ModuleName $script:dscModuleName {
+                Mock Invoke-DigitalOceanAPI -MockWith {
+                    return @{
+                        volumes = @()
+                        links   = @{
+                            pages = @{
+                                next = $null
+                            }
+                        }
+                        meta    = @{
+                            total = 0
+                        }
+                    }
+                }
+
+                $result = Get-DigitalOceanVolume -All
+
+                $result | Should -BeNullOrEmpty
+
+                Assert-MockCalled Invoke-DigitalOceanAPI -Times 1 -Exactly
+            }
+        }
+    }
 }

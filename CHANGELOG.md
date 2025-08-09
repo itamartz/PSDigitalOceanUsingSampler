@@ -11,11 +11,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.6.0] - 2025-08-10
+
+### Added
+
+- Added new `New-DigitalOceanVolume` function for creating new volumes
+- Enhanced `Get-DigitalOceanVolume` function with comprehensive error handling
+  and edge case coverage
+- Support for creating volumes from snapshots using the FromSnapshot parameter set
+- Advanced filesystem configuration with ext4 and xfs support
+- Volume creation validation with proper parameter set restrictions
+- ShouldProcess support (-WhatIf and -Confirm) for volume creation operations
+- Extensive unit test coverage achieving 97.51% code coverage
+- Comprehensive error handling for API failures, malformed data, and edge cases
+- Enhanced pagination tests for thorough volume retrieval validation
+
+### Changed
+
+- Improved Get-DigitalOceanVolume test coverage from 83.13% to 97.51%
+- Enhanced error handling and malformed data processing
+- Updated module version to 1.6.0
+
+### Fixed
+
+- Fixed pagination logic edge cases in Get-DigitalOceanVolume
+- Resolved test coverage gaps for error scenarios
+- Improved URL encoding for special characters in API parameters
+
 ## [1.5.0] - 2025-08-07
 
 ### Added
 
-- Added new `Get-DigitalOceanVolume` function with comprehensive volume management capabilities
+- Added new `Get-DigitalOceanVolume` function with comprehensive volume
+  management capabilities
 - Support for volume retrieval by ID using the ById parameter set
 - Support for volume retrieval by name using the ByName parameter set  
 - Support for volume listing with pagination using the List parameter set

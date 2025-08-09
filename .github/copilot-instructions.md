@@ -91,17 +91,24 @@ This ensures proper dependency resolution during module compilation.
 
 ## PSSScriptAnalyzer and Pester
 
-When you create a new function make sure that the function passes the PSScriptAnalyzer rules:
+New function instructions:
 
-- 'should not have the open brace on the same line as the statement.'
-- 'should not use the `Write-Host` cmdlet.'
+- create a new git branch for the new function with version update
+- create a new ps1 file in the `source/Public/` folder with the function name
+- use `Pester` for unit testing with at least 90% code coverage, add tests one by one and build the module between tests until you reach the coverage
+- Use `PSScriptAnalyzer` to enforce coding standards
+- Use `PSScriptAnalyzer` 'should not have the open brace on the same line as the statement.'
+- Use `PSScriptAnalyzer` 'should not use the `Write-Host` cmdlet.'
+- Use `PSScriptAnalyzer` 'Line has trailing whitespace.'
 
 # Configuration Guide for PSDigitalOcean Module
 
-when you run .\build.ps1 (-AutoRestore) and it pass with 'Build succeeded' update the README.md file with the new code coverage and test counts, and create a new wiki page for the new function in the `wiki` folder.
-Also increase the version number in the `source/PSDigitalOcean.psd1` file and in the `CHANGELOG.md` file, and update the `wiki/Configuration.md` file with the new version number.
-Also create a new tag in the format `v1.0.0` (or whatever the new version is) and push it to the remote repository.
+After we run .\build.ps1 (-AutoRestore) and it pass we doing the following:
 
-## wiki/Configuration.md
-
-if you add a file to wiki folder dont forget to run the script in scripts\Update-GitHubWiki.ps1
+- run code coverage tests and update the `README.md` file with the new code coverage and test counts
+- create a new wiki page for the new function in the `wiki` folder.
+- update the version number in the `source/PSDigitalOcean.psd1` file.
+- update the `CHANGELOG.md` file with the new version number and changes.
+- update the `wiki/Configuration.md` file with the new version number.
+- create a new tag in the format `v1.0.0` (or whatever the new version is) and push it to the remote repository.
+- update the wiki in github using the script in `scripts\Update-GitHubWiki.ps1`.
