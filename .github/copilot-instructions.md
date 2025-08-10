@@ -106,7 +106,7 @@ New function instructions:
 **CRITICAL**: Functions that are NOT GET functions (Create, Update, Delete operations) MUST be tested with real API calls:
 
 - **Unit Tests**: Use mocking for code coverage and parameter validation
-- **Integration Tests**: Test non-GET functions with real DigitalOcean API calls using actual tokens
+- **Integration Tests**: Test non-GET functions with real DigitalOcean API calls using actual tokens, create a test file in `tests/Integration/` folder.
 - **Real API Validation**: Before committing any New-, Set-, Remove-, or other mutating functions, test with actual API endpoints
 - **Test Environment**: Use test/development DigitalOcean account for integration testing to avoid affecting production resources
 - **Error Validation**: Verify that real API error responses are handled correctly, not just mocked error scenarios
