@@ -1,4 +1,4 @@
-function Remove-DigitalOceanDroplet
+﻿function Remove-DigitalOceanDroplet
 {
     <#
     .SYNOPSIS
@@ -148,7 +148,14 @@ function Remove-DigitalOceanDroplet
                     if ($responseBody)
                     {
                         $apiError = $null
-                        try { $apiError = $responseBody | ConvertFrom-Json } catch { }
+                        try
+                        {
+                            $apiError = $responseBody | ConvertFrom-Json
+                        }
+                        catch
+                        {
+                            throw "Could not parse API error response as JSON"
+                        }
                         if ($apiError -and $apiError.message)
                         {
                             $errorMessage += " API Error: $($apiError.message)"
