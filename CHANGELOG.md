@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+ - **New Function**: `Remove-DigitalOceanDroplet` - Delete a single Droplet by ID or
+   all Droplets by tag with ShouldProcess support, robust error handling, and
+   verbose tracing.
+
 ### Changed
 
 ### Fixed

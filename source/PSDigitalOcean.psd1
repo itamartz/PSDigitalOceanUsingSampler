@@ -12,7 +12,7 @@
     RootModule           = 'PSDigitalOcean.psm1'
 
     # Version number of this module.
-    ModuleVersion        = '1.7.0'
+    ModuleVersion        = '1.8.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -80,7 +80,8 @@
         'Get-DigitalOceanVPC',
         'New-DigitalOceanDroplet',
         'New-DigitalOceanVolume',
-        'Remove-DigitalOceanVolume'
+    'Remove-DigitalOceanVolume',
+    'Remove-DigitalOceanDroplet'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
