@@ -22,6 +22,7 @@ Welcome to the PSDigitalOcean PowerShell module documentation wiki!
 - [Get-DigitalOceanVPC](Get-DigitalOceanVPC)
 - [New-DigitalOceanDroplet](New-DigitalOceanDroplet)
 - [New-DigitalOceanVolume](New-DigitalOceanVolume)
+- [Remove-DigitalOceanDroplet](Remove-DigitalOceanDroplet)
 - [Remove-DigitalOceanVolume](Remove-DigitalOceanVolume)
 
 ### Advanced Topics
@@ -57,4 +58,4 @@ Welcome to the PSDigitalOcean PowerShell module documentation wiki!
 ## Last Updated
 
 This wiki is automatically updated with each release.  
-Last updated: 2025-08-10
+Last updated: 2025-08-11
